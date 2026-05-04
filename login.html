@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLEX | Merchant Sign In</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --indigo: #6366f1;
+            --bg: #050507;
+            --surface: #111115;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); 
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .auth-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 48px;
+            width: 100%;
+            max-width: 440px;
+        }
+        .input-group {
+            margin-bottom: 24px;
+        }
+        .input-label {
+            display: block;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+        .input-field {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 20px;
+            width: 100%;
+            color: white;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--indigo);
+            color: white;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 16px;
+            border-radius: 16px;
+            width: 100%;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-card">
+        <div class="text-center mb-10">
+            <a href="index.html" class="text-3xl font-black italic tracking-tighter">OL<span class="text-[#6366f1]">EX</span></a>
+            <h1 class="text-2xl font-extrabold mt-4">Welcome back</h1>
+            <p class="text-slate-500 text-sm mt-2">Sign in to your merchant portal</p>
+        </div>
+
+        <form action="merchant.html">
+            <div class="input-group">
+                <label class="input-label">Email Address</label>
+                <input type="email" class="input-field" placeholder="name@company.com" required>
+            </div>
+
+            <div class="input-group">
+                <div class="flex justify-between items-center mb-2">
+                    <label class="input-label mb-0">Password</label>
+                    <a href="#" class="text-[10px] font-bold text-[#6366f1]">Forgot?</a>
+                </div>
+                <input type="password" class="input-field" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-primary mt-4">Sign In</button>
+            
+            <p class="text-center text-xs text-slate-500 mt-8">
+                Don't have an account? <a href="signup.html" class="text-[#6366f1] font-bold">Create one</a>
+            </p>
+        </form>
+    </div>
+
+</body>
+</html>

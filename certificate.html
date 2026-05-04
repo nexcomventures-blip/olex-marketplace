@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLEX | Merchant Trust Certificate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --indigo: #6366f1;
+            --bg: #050507;
+            --surface: #0c0c11;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); 
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .cert-container {
+            background: #0c0c11;
+            border: 2px solid #6366f1;
+            border-radius: 40px;
+            padding: 60px;
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 100px rgba(99, 102, 241, 0.2);
+        }
+        .cert-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
+        .seal {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            position: absolute;
+            top: 60px;
+            right: 60px;
+        }
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            background: white;
+            padding: 8px;
+            border-radius: 12px;
+        }
+        @media print {
+            body { background: white; color: black; }
+            .cert-container { border: 2px solid black; box-shadow: none; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cert-container relative z-10">
+        <div class="seal">
+            <i class="fa fa-shield-check"></i>
+        </div>
+
+        <div class="mb-12">
+            <h1 class="text-4xl font-black italic tracking-tighter mb-2">OL<span class="text-[#6366f1]">EX</span></h1>
+            <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500">Global Trust Network</p>
+        </div>
+
+        <div class="mb-12">
+            <h2 class="text-xs font-black uppercase tracking-widest text-indigo-400 mb-6">Certificate of Merchant Excellence</h2>
+            <h3 class="text-5xl font-extrabold mb-4 tracking-tight">Nexcom Ventures</h3>
+            <p class="text-xl text-slate-400 font-medium leading-relaxed max-w-lg">
+                This entity is officially recognized as an <span class="text-white font-bold italic">OLEX Verified Elite Dealer</span> in Nairobi, Kenya.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-12 pt-12 border-t border-white/10">
+            <div>
+                <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-2">Verification ID</p>
+                <p class="text-sm font-mono font-bold">OLEX-NBO-2026-V882</p>
+                <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest mt-6 mb-2">Issue Date</p>
+                <p class="text-sm font-bold">May 05, 2026</p>
+            </div>
+            <div class="flex justify-end items-end gap-6">
+                <div class="text-right">
+                    <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-2">Trust Score</p>
+                    <p class="text-2xl font-black italic text-green-400">98%</p>
+                </div>
+                <div class="qr-code">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://nexcomventures-blip.github.io/olex-marketplace/merchant.html" alt="QR Code">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-white/5 flex justify-between items-center no-print">
+            <p class="text-[10px] text-slate-500 italic max-w-xs">Scan QR to verify merchant status on the live OLEX network.</p>
+            <div class="flex gap-4">
+                <button onclick="window.print()" class="bg-white/5 hover:bg-white/10 border border-white/10 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition">Download PDF</button>
+                <button onclick="window.location.href='merchant.html'" class="bg-indigo-600 hover:bg-indigo-500 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition">Back to Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

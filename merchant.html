@@ -133,7 +133,7 @@
                     <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                     <span class="text-xs font-bold uppercase tracking-widest opacity-60">System Secure</span>
                 </div>
-                <button class="bg-indigo-600 hover:bg-indigo-500 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition">Add New Asset</button>
+                <button onclick="openAddModal()" class="bg-indigo-600 hover:bg-indigo-500 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition">Add New Asset</button>
             </div>
         </header>
 
@@ -230,5 +230,69 @@
         </div>
     </main>
 
+    <!-- Add Product Modal -->
+    <div id="addModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeAddModal()"></div>
+        <div class="relative bg-[#0c0c11] border border-white/10 w-full max-w-xl rounded-[32px] overflow-hidden shadow-2xl p-10">
+            <h2 class="text-2xl font-black italic mb-2">Deploy New Asset</h2>
+            <p class="text-xs text-slate-500 mb-8 uppercase tracking-widest font-bold">Inventory Management System</p>
+            
+            <form id="addForm" class="space-y-6">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Brand</label>
+                        <select id="newBrand" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-indigo-500">
+                            <option value="Apple">Apple</option>
+                            <option value="HP">HP</option>
+                            <option value="Dell">Dell</option>
+                            <option value="Lenovo">Lenovo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Asset Name</label>
+                        <input type="text" id="newName" placeholder="e.g. MacBook Pro M3" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-indigo-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Technical Specifications</label>
+                    <textarea id="newSpecs" rows="3" placeholder="Processor, RAM, Storage, Screen..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-indigo-500"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Price (KSh)</label>
+                        <input type="text" id="newPrice" placeholder="e.g. 150,000" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Image URL</label>
+                        <input type="text" id="newImg" placeholder="https://..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-indigo-500">
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition">Add to Live Inventory</button>
+                    <button type="button" onclick="closeAddModal()" class="w-full mt-2 text-[10px] font-bold text-slate-500 hover:text-white uppercase tracking-widest transition">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openAddModal() {
+            document.getElementById('addModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeAddModal() {
+            document.getElementById('addModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('addForm').onsubmit = function(e) {
+            e.preventDefault();
+            alert("Asset processed successfully! In a production environment, this would now update your global inventory database and sync across the OLEX network.");
+            closeAddModal();
+        }
+    </script>
 </body>
 </html>

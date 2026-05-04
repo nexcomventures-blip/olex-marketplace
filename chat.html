@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLEX Secure Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #050507;
+            --surface: #0f1014;
+            --border: rgba(255,255,255,0.08);
+            --indigo: #6366f1;
+        }
+        body { background-color: var(--bg); color: white; font-family: 'Inter', sans-serif; }
+        .chat-bubble-user {
+            background: var(--indigo);
+            border-radius: 18px 18px 2px 18px;
+        }
+        .chat-bubble-merchant {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px 18px 18px 2px;
+        }
+        .glass {
+            background: rgba(15, 16, 20, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="glass border-b border-white/5 p-4 flex items-center justify-between sticky top-0 z-10">
+        <div class="flex items-center gap-3">
+            <button onclick="history.back()" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
+                <i class="fa fa-arrow-left text-xs"></i>
+            </button>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h3 class="font-bold text-sm" id="chatPartner">Nexcom Ventures</h3>
+                    <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                </div>
+                <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest">Verified Merchant</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+             <div class="bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20 flex items-center gap-2">
+                <i class="fa fa-shield-check text-indigo-400 text-[10px]"></i>
+                <span class="text-[9px] font-black text-indigo-400 uppercase">Escrow Protected</span>
+             </div>
+        </div>
+    </header>
+
+    <!-- Chat Body -->
+    <main class="flex-1 overflow-y-auto p-4 space-y-6" id="chatBox">
+        <div class="flex justify-center">
+            <div class="bg-white/5 px-4 py-2 rounded-xl border border-white/5 text-[10px] text-slate-500 uppercase font-bold tracking-widest text-center max-w-xs">
+                Encrypted session established. Your personal details are masked from the merchant for your safety.
+            </div>
+        </div>
+
+        <!-- Automated Product Inquiry -->
+        <div class="flex justify-end">
+            <div class="chat-bubble-user p-4 max-w-[80%] shadow-lg">
+                <div class="bg-black/20 rounded-lg p-2 mb-2 flex gap-3 items-center border border-white/5">
+                    <img id="inquiryImg" src="" class="w-10 h-10 object-cover rounded">
+                    <div>
+                        <p class="text-[10px] font-bold text-white/70" id="inquiryName"></p>
+                        <p class="text-xs font-black" id="inquiryPrice"></p>
+                    </div>
+                </div>
+                <p class="text-sm">Hi, I'm interested in this laptop. Is it available for immediate OLEX Escrow pickup?</p>
+            </div>
+        </div>
+
+        <!-- Merchant Auto-Reply -->
+        <div class="flex justify-start">
+            <div class="chat-bubble-merchant p-4 max-w-[80%] shadow-lg">
+                <p class="text-sm">Hi! Yes, this unit is available at our Mama Ngina St branch. You can complete the payment via Secure Buy to lock the price and initiate the escrow process.</p>
+                <p class="text-[10px] text-slate-500 mt-2">Merchant • Just now</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Input -->
+    <footer class="p-4 border-t border-white/5 glass">
+        <div class="max-w-[1400px] mx-auto flex gap-3">
+            <button class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+                <i class="fa fa-plus text-slate-400"></i>
+            </button>
+            <div class="flex-1 bg-white/5 rounded-2xl border border-white/10 px-4 flex items-center">
+                <input type="text" placeholder="Type a secure message..." class="bg-transparent border-none outline-none text-sm w-full py-3">
+            </div>
+            <button class="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                <i class="fa fa-paper-plane text-white text-xs"></i>
+            </button>
+        </div>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('inquiryName').innerText = urlParams.get('name') || 'Laptop Inquiry';
+        document.getElementById('inquiryPrice').innerText = urlParams.get('price') || '';
+        document.getElementById('inquiryImg').src = urlParams.get('img') || '';
+
+        // Auto-scroll to bottom
+        const chatBox = document.getElementById('chatBox');
+        chatBox.scrollTop = chatBox.scrollHeight;
+    </script>
+</body>
+</html>

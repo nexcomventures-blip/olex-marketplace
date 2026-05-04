@@ -3,199 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ol ex | Premium Multi-Category Exchange</title>
+    <title>OLEX | Premium Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            /* Deep Space & Electric Indigo Palette */
+            --indigo: #6366f1;
             --bg: #050507;
-            --surface: #0c0c11;
-            --surface-hover: #14141d;
-            --border: rgba(99, 102, 241, 0.1);
-            --accent: #6366f1; /* Electric Indigo */
-            --accent-glow: rgba(99, 102, 241, 0.4);
-            --text-primary: #ffffff;
-            --text-secondary: #94a3b8;
+            --surface: #111115;
+            --border: rgba(255, 255, 255, 0.08);
         }
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: var(--bg); 
-            color: var(--text-primary);
-            letter-spacing: -0.01em;
-            overflow-x: hidden;
+            color: white;
         }
-        .mesh-gradient {
-            background: 
-                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.05) 0, transparent 50%);
+        .jiji-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
         }
-        .sidebar-item:hover { 
-            background: var(--surface-hover); 
-            color: var(--accent);
-        }
-        .sidebar-active { 
-            background: rgba(99, 102, 241, 0.1); 
-            color: var(--accent); 
-            border-left: 3px solid var(--accent); 
-        }
-        .glass { 
-            background: rgba(12, 12, 17, 0.8); 
-            backdrop-filter: blur(12px); 
-            border-bottom: 1px solid var(--border); 
-        }
-        .card-premium {
+        .sidebar {
             background: var(--surface);
             border: 1px solid var(--border);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 16px;
+            padding: 16px;
+            height: fit-content;
         }
-        .card-premium:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.1);
-            transform: translateY(-2px);
+        .category-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            color: #94a3b8;
+            font-size: 14px;
+            font-weight: 600;
         }
-        .btn-indigo {
-            background: var(--accent);
+        .category-link:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--indigo);
+        }
+        .category-link.active {
+            background: var(--indigo);
             color: white;
-            box-shadow: 0 0 20px var(--accent-glow);
-            transition: all 0.3s ease;
         }
-        .btn-indigo:hover {
-            box-shadow: 0 0 30px var(--accent-glow);
-            transform: scale(1.02);
+        .listing-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s;
         }
-        .text-indigo { color: var(--accent); }
+        .listing-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--indigo);
+        }
+        .search-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .search-bar input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            width: 100%;
+        }
+        .premium-tag {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--indigo);
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
     </style>
 </head>
-<body class="min-h-screen mesh-gradient">
+<body class="pt-24">
 
-    <!-- Header -->
-    <header class="fixed top-0 w-full z-50 glass">
-        <div class="max-w-[1600px] mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-12">
-                <a href="#" class="text-2xl font-black tracking-tighter uppercase">OL<span class="text-indigo">EX</span></a>
-                <div class="hidden lg:flex items-center gap-4 bg-white/5 border border-white/5 rounded-full px-6 py-2 w-[400px]">
-                    <i class="fa fa-search text-white/20 text-sm"></i>
-                    <input type="text" placeholder="Search premium assets..." class="bg-transparent border-none outline-none text-xs font-medium w-full text-white">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 bg-[#050507]/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-8 flex-1">
+                <a href="#" class="text-2xl font-black italic tracking-tighter">OL<span class="text-[#6366f1]">EX</span></a>
+                <div class="search-bar max-w-xl hidden md:flex">
+                    <i class="fa fa-search text-slate-500"></i>
+                    <input type="text" placeholder="I'm looking for...">
+                    <button class="bg-[#6366f1] px-4 py-1.5 rounded-lg text-xs font-bold">Search</button>
                 </div>
             </div>
-            <div class="flex items-center gap-6">
-                <a href="#" class="text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-white transition">Sign In</a>
-                <button class="btn-indigo px-6 py-2.5 rounded-full text-[10px] font-extrabold uppercase tracking-widest">Post Listing</button>
+            <div class="flex items-center gap-4">
+                <button class="text-sm font-bold text-slate-400">Sign in</button>
+                <button class="bg-white text-black px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider">Sell</button>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <div class="max-w-[1600px] mx-auto flex pt-20">
+    <div class="jiji-grid">
         
-        <!-- Sidebar Navigation -->
-        <aside class="w-72 fixed h-[calc(100vh-80px)] border-r border-white/5 pt-8 px-4 hidden lg:block overflow-y-auto">
-            <div class="mb-8 px-4">
-                <h3 class="text-[9px] font-black uppercase tracking-[0.4em] text-indigo/60 mb-6">Asset Classes</h3>
-                <nav class="flex flex-col gap-1">
-                    <a href="#" class="sidebar-item sidebar-active flex items-center gap-4 px-4 py-3 rounded-xl transition text-[11px] font-bold">
-                        <i class="fa fa-car-side w-5"></i> Vehicles
-                    </a>
-                    <a href="#" class="sidebar-item flex items-center gap-4 px-4 py-3 rounded-xl transition text-[11px] font-bold text-white/40">
-                        <i class="fa fa-house w-5"></i> Property
-                    </a>
-                    <a href="#" class="sidebar-item flex items-center gap-4 px-4 py-3 rounded-xl transition text-[11px] font-bold text-white/40">
-                        <i class="fa fa-mobile-screen w-5"></i> Mobile & Tablets
-                    </a>
-                    <a href="#" class="sidebar-item flex items-center gap-4 px-4 py-3 rounded-xl transition text-[11px] font-bold text-white/40">
-                        <i class="fa fa-laptop w-5"></i> Electronics
-                    </a>
-                    <a href="#" class="sidebar-item flex items-center gap-4 px-4 py-3 rounded-xl transition text-[11px] font-bold text-white/40">
-                        <i class="fa fa-briefcase w-5"></i> Pro Services
-                    </a>
-                </nav>
-            </div>
+        <!-- Sidebar Navigation (Jiji Style) -->
+        <aside class="sidebar hidden lg:block">
+            <h3 class="px-3 text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4">Categories</h3>
+            <nav class="space-y-1">
+                <a href="#" class="category-link active"><i class="fa fa-car w-5"></i> Vehicles</a>
+                <a href="#" class="category-link"><i class="fa fa-house w-5"></i> Property</a>
+                <a href="#" class="category-link"><i class="fa fa-mobile-screen w-5"></i> Mobile Phones</a>
+                <a href="#" class="category-link"><i class="fa fa-laptop w-5"></i> Electronics</a>
+                <a href="#" class="category-link"><i class="fa fa-couch w-5"></i> Home & Furniture</a>
+                <a href="#" class="category-link"><i class="fa fa-briefcase w-5"></i> Services</a>
+                <a href="#" class="category-link"><i class="fa fa-shirt w-5"></i> Fashion</a>
+                <a href="#" class="category-link"><i class="fa fa-gears w-5"></i> Industrial</a>
+            </nav>
         </aside>
 
-        <!-- Main Content -->
-        <main class="flex-1 lg:ml-72 p-8">
-            
-            <!-- Hero Banner -->
-            <section class="mb-16">
-                <div class="relative h-[450px] rounded-[40px] overflow-hidden group border border-indigo/20">
-                    <div class="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent z-10"></div>
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2000" class="absolute inset-0 w-full h-full object-cover opacity-30 grayscale group-hover:scale-105 transition duration-1000" alt="Tech Background">
-                    <div class="relative z-20 h-full flex flex-col justify-center px-16 max-w-2xl">
-                        <span class="text-[10px] font-bold uppercase tracking-[0.5em] text-indigo mb-4">Elite Marketplace</span>
-                        <h2 class="text-6xl font-extrabold tracking-tighter uppercase mb-6 leading-none">The Future of <br><span class="text-indigo">Exchange.</span></h2>
-                        <p class="text-white/40 font-light mb-8 italic text-lg">Curated, high-value listings for the modern entity.</p>
-                        <div class="flex gap-4">
-                            <button class="btn-indigo px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest">Start Trading</button>
+        <!-- Feed Section -->
+        <main>
+            <!-- Trending/Featured Header -->
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold">Premium Featured</h2>
+                <div class="flex gap-2">
+                    <span class="text-xs font-bold text-slate-500">Sort by:</span>
+                    <select class="bg-transparent text-xs font-bold outline-none">
+                        <option>Newest</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Pricing Tiers (Integrated into the Feed) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+                <div class="bg-[#6366f1] p-6 rounded-2xl relative overflow-hidden group cursor-pointer">
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[10px] font-black uppercase tracking-widest bg-white/20 px-2 py-1 rounded">Seller Package</span>
+                            <i class="fa fa-rocket text-white/40 group-hover:translate-x-2 transition"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-1">Professional Dealer</h3>
+                        <p class="text-white/60 text-xs mb-6">Unlimited listings + VIP Support</p>
+                        <div class="text-3xl font-black italic">KSh 60,000<span class="text-xs font-normal opacity-60">/mo</span></div>
+                    </div>
+                    <div class="absolute -right-8 -bottom-8 text-white/10 text-9xl font-black italic -rotate-12 group-hover:rotate-0 transition duration-700">VIP</div>
+                </div>
+                <div class="bg-[#111115] border border-white/5 p-6 rounded-2xl hover:border-[#6366f1] transition cursor-pointer">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-[10px] font-black uppercase tracking-widest bg-white/5 px-2 py-1 rounded text-slate-400">Single Asset</span>
+                        <i class="fa fa-star text-[#6366f1]"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-1">Luxury Vehicle</h3>
+                    <p class="text-slate-400 text-xs mb-6">Homepage Featured for 30 Days</p>
+                    <div class="text-3xl font-black italic text-[#6366f1]">KSh 25,000</div>
+                </div>
+            </div>
+
+            <!-- Jiji-Style Feed -->
+            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Listing 1 -->
+                <div class="listing-card">
+                    <div class="aspect-square bg-slate-800 relative">
+                        <div class="absolute top-2 left-2 premium-tag">Verified</div>
+                        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover opacity-80" alt="Car">
+                    </div>
+                    <div class="p-4">
+                        <p class="text-[10px] font-bold text-[#6366f1] uppercase mb-1">Vehicles</p>
+                        <h4 class="text-sm font-bold truncate">Toyota Land Cruiser V8</h4>
+                        <p class="text-xs text-slate-500 mb-3">Westlands, Nairobi</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-black italic">KSh 12.5M</span>
+                            <button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#6366f1] transition"><i class="fa fa-phone text-[10px]"></i></button>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- Packages -->
-            <section class="mb-16">
-                <div class="flex justify-between items-end mb-10">
-                    <h3 class="text-2xl font-extrabold tracking-tight uppercase">Premium Tiers</h3>
+                <!-- Listing 2 -->
+                <div class="listing-card">
+                    <div class="aspect-square bg-slate-800 relative">
+                        <img src="https://images.unsplash.com/photo-1512446816042-444d641267d4?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover opacity-80" alt="Phone">
+                    </div>
+                    <div class="p-4">
+                        <p class="text-[10px] font-bold text-[#6366f1] uppercase mb-1">Electronics</p>
+                        <h4 class="text-sm font-bold truncate">iPhone 15 Pro Max 512GB</h4>
+                        <p class="text-xs text-slate-500 mb-3">CBD, Nairobi</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-black italic">KSh 185,000</span>
+                            <button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#6366f1] transition"><i class="fa fa-phone text-[10px]"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Listing 3 -->
+                <div class="listing-card">
+                    <div class="aspect-square bg-slate-800 relative">
+                        <div class="absolute top-2 left-2 premium-tag">Featured</div>
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover opacity-80" alt="House">
+                    </div>
+                    <div class="p-4">
+                        <p class="text-[10px] font-bold text-[#6366f1] uppercase mb-1">Property</p>
+                        <h4 class="text-sm font-bold truncate">5 Bedroom Villa + SQ</h4>
+                        <p class="text-xs text-slate-500 mb-3">Karen, Nairobi</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-black italic">KSh 85M</span>
+                            <button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#6366f1] transition"><i class="fa fa-phone text-[10px]"></i></button>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Luxury Motors -->
-                    <div class="card-premium p-8 rounded-3xl">
-                        <p class="text-[9px] font-bold text-indigo uppercase tracking-widest mb-4">Automotive</p>
-                        <h4 class="text-lg font-bold mb-1">Luxury Motors</h4>
-                        <div class="text-4xl font-black italic my-8">KSh 25,000</div>
-                        <ul class="text-[10px] font-bold uppercase text-white/40 space-y-3 mb-8">
-                            <li><i class="fa fa-check text-indigo mr-2"></i> Homepage Feature</li>
-                            <li><i class="fa fa-check text-indigo mr-2"></i> VIP Verified</li>
-                        </ul>
-                        <button class="w-full py-4 border border-indigo/30 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-indigo transition">Post Now</button>
+                <!-- Listing 4 -->
+                <div class="listing-card">
+                    <div class="aspect-square bg-slate-800 relative">
+                        <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover opacity-80" alt="Laptop">
                     </div>
-
-                    <!-- Elite Real Estate -->
-                    <div class="card-premium p-8 rounded-3xl border-indigo/40 bg-indigo/5">
-                        <p class="text-[9px] font-bold text-indigo uppercase tracking-widest mb-4">Property</p>
-                        <h4 class="text-lg font-bold mb-1">Elite Estate</h4>
-                        <div class="text-4xl font-black italic my-8">KSh 45,000</div>
-                        <ul class="text-[10px] font-bold uppercase text-white/40 space-y-3 mb-8">
-                            <li><i class="fa fa-check text-indigo mr-2"></i> Top 1 Placement</li>
-                            <li><i class="fa fa-check text-indigo mr-2"></i> Lead Priority</li>
-                        </ul>
-                        <button class="w-full py-4 btn-indigo rounded-xl text-[9px] font-black uppercase tracking-widest">Post Now</button>
-                    </div>
-
-                    <!-- Tech Merchant -->
-                    <div class="card-premium p-8 rounded-3xl">
-                        <p class="text-[9px] font-bold text-indigo uppercase tracking-widest mb-4">Merchant</p>
-                        <h4 class="text-lg font-bold mb-1">Monthly Retail</h4>
-                        <div class="text-4xl font-black italic my-8">KSh 25,000</div>
-                        <ul class="text-[10px] font-bold uppercase text-white/40 space-y-3 mb-8">
-                            <li><i class="fa fa-check text-indigo mr-2"></i> Unlimited Tech</li>
-                            <li><i class="fa fa-check text-indigo mr-2"></i> Shop Profile</li>
-                        </ul>
-                        <button class="w-full py-4 border border-indigo/30 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-indigo transition">Subscribe</button>
-                    </div>
-
-                    <!-- Standard Auto -->
-                    <div class="card-premium p-8 rounded-3xl">
-                        <p class="text-[9px] font-bold text-indigo uppercase tracking-widest mb-4">Automotive</p>
-                        <h4 class="text-lg font-bold mb-1">Standard Auto</h4>
-                        <div class="text-4xl font-black italic my-8">KSh 8,000</div>
-                        <ul class="text-[10px] font-bold uppercase text-white/40 space-y-3 mb-8">
-                            <li><i class="fa fa-check text-indigo mr-2"></i> 60 Day Post</li>
-                            <li><i class="fa fa-check text-indigo mr-2"></i> Standard Rank</li>
-                        </ul>
-                        <button class="w-full py-4 border border-indigo/30 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-indigo transition">Post Now</button>
+                    <div class="p-4">
+                        <p class="text-[10px] font-bold text-[#6366f1] uppercase mb-1">Tech Suite</p>
+                        <h4 class="text-sm font-bold truncate">Dell XPS 17 9720</h4>
+                        <p class="text-xs text-slate-500 mb-3">Mama Ngina St, Nairobi</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-black italic">KSh 320,000</span>
+                            <button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#6366f1] transition"><i class="fa fa-phone text-[10px]"></i></button>
+                        </div>
                     </div>
                 </div>
-            </section>
 
+            </div>
         </main>
     </div>
 
-    <footer class="lg:ml-72 border-t border-white/5 py-20 px-8 text-center bg-surface">
-        <div class="text-2xl font-black tracking-tighter uppercase mb-6">OL<span class="text-indigo">EX</span></div>
-        <p class="text-[10px] font-bold text-white/10 uppercase tracking-[0.6em] mb-4">A Nexcom Ventures Masterpiece &bull; 2026</p>
-    </footer>
-
 </body>
-</html> 
+</html>

@@ -59,6 +59,9 @@
             border-radius: 16px;
             overflow: hidden;
             transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         .listing-card:hover {
             transform: translateY(-4px);
@@ -98,10 +101,10 @@
     <nav class="fixed top-0 w-full z-50 bg-[#050507]/80 backdrop-blur-md border-b border-white/5">
         <div class="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-8 flex-1">
-                <a href="#" class="text-2xl font-black italic tracking-tighter">OL<span class="text-[#6366f1]">EX</span></a>
+                <a href="index.html" class="text-2xl font-black italic tracking-tighter">OL<span class="text-[#6366f1]">EX</span></a>
                 <div class="search-bar max-w-xl hidden md:flex">
                     <i class="fa fa-search text-slate-500"></i>
-                    <input type="text" placeholder="I'm looking for...">
+                    <input type="text" placeholder="Search for premium laptops, cars, or property...">
                     <button class="bg-[#6366f1] px-4 py-1.5 rounded-lg text-xs font-bold">Search</button>
                 </div>
             </div>
@@ -114,132 +117,167 @@
 
     <div class="jiji-grid">
         
-        <!-- Sidebar Navigation (Jiji Style) -->
+        <!-- Sidebar Navigation -->
         <aside class="sidebar hidden lg:block">
-            <h3 class="px-3 text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4">Categories</h3>
-                <nav class="space-y-1">
-                    <a href="merchant.html" class="category-link flex items-center gap-3 px-3 py-2 text-indigo-400 border border-indigo-500/20 bg-indigo-500/5 rounded-lg mb-4 text-xs font-black uppercase tracking-tighter"><i class="fa fa-chart-line"></i> Dashboard</a>
-                    <a href="#" class="category-link active"><i class="fa fa-car w-5"></i> Vehicles</a>
+            <h3 class="px-3 text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4">Navigation</h3>
+            <nav class="space-y-1">
+                <a href="merchant.html" class="category-link flex items-center gap-3 px-3 py-2 text-indigo-400 border border-indigo-500/20 bg-indigo-500/5 rounded-lg mb-4 text-xs font-black uppercase tracking-tighter"><i class="fa fa-chart-line"></i> Dashboard</a>
+                <a href="#" class="category-link active"><i class="fa fa-laptop w-5"></i> Electronics</a>
+                <a href="#" class="category-link"><i class="fa fa-car w-5"></i> Vehicles</a>
                 <a href="#" class="category-link"><i class="fa fa-house w-5"></i> Property</a>
                 <a href="#" class="category-link"><i class="fa fa-mobile-screen w-5"></i> Mobile Phones</a>
-                <a href="#" class="category-link"><i class="fa fa-laptop w-5"></i> Electronics</a>
                 <a href="#" class="category-link"><i class="fa fa-couch w-5"></i> Home & Furniture</a>
                 <a href="#" class="category-link"><i class="fa fa-briefcase w-5"></i> Services</a>
-                <a href="#" class="category-link"><i class="fa fa-shirt w-5"></i> Fashion</a>
-                <a href="#" class="category-link"><i class="fa fa-gears w-5"></i> Industrial</a>
             </nav>
         </aside>
 
         <!-- Feed Section -->
         <main>
-            <!-- Trending/Featured Header -->
             <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-bold">Premium Featured</h2>
+                <h2 class="text-xl font-bold">Nexcom Premium Laptops</h2>
                 <div class="flex gap-2">
-                    <span class="text-xs font-bold text-slate-500">Sort by:</span>
-                    <select class="bg-transparent text-xs font-bold outline-none">
-                        <option>Newest</option>
-                        <option>Price: High to Low</option>
+                    <span class="text-xs font-bold text-slate-500">Filter:</span>
+                    <select class="bg-transparent text-xs font-bold outline-none" id="brandFilter">
+                        <option value="all">All Brands</option>
+                        <option value="hp">HP</option>
+                        <option value="dell">Dell</option>
+                        <option value="lenovo">Lenovo</option>
+                        <option value="apple">Apple</option>
                     </select>
                 </div>
             </div>
 
-            <!-- Pricing Tiers (Integrated into the Feed) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-                <div class="bg-[#6366f1] p-6 rounded-2xl relative overflow-hidden group cursor-pointer">
-                    <div class="relative z-10">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-[10px] font-black uppercase tracking-widest bg-white/20 px-2 py-1 rounded">Seller Package</span>
-                            <i class="fa fa-rocket text-white/40 group-hover:translate-x-2 transition"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-1">Professional Dealer</h3>
-                        <p class="text-white/60 text-xs mb-6">Unlimited listings + VIP Support</p>
-                        <div class="text-3xl font-black italic">KSh 60,000<span class="text-xs font-normal opacity-60">/mo</span></div>
-                    </div>
-                    <div class="absolute -right-8 -bottom-8 text-white/10 text-9xl font-black italic -rotate-12 group-hover:rotate-0 transition duration-700">VIP</div>
-                </div>
-                <div class="bg-[#111115] border border-white/5 p-6 rounded-2xl hover:border-[#6366f1] transition cursor-pointer">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-[10px] font-black uppercase tracking-widest bg-white/5 px-2 py-1 rounded text-slate-400">Single Asset</span>
-                        <i class="fa fa-star text-[#6366f1]"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-1">Luxury Vehicle</h3>
-                    <p class="text-slate-400 text-xs mb-6">Homepage Featured for 30 Days</p>
-                    <div class="text-3xl font-black italic text-[#6366f1]">KSh 25,000</div>
-                </div>
-            </div>
-
-            <!-- Jiji-Style Feed -->
-            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-                <!-- Listing 1 -->
-                <div class="listing-card">
-                    <div class="aspect-square bg-slate-800 relative">
-                        <div class="absolute top-2 left-2 premium-tag">Verified</div>
-                        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover opacity-80" alt="Car">
-                    </div>
-                    <div class="p-4">
-                        <p class="text-[10px] font-bold text-[#6366f1] uppercase mb-1">Vehicles</p>
-                        <h4 class="text-sm font-bold truncate">Toyota Land Cruiser V8</h4>
-                        <p class="text-xs text-slate-500 mb-3">Westlands, Nairobi</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm font-black italic">KSh 12.5M</span>
-                            <button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#6366f1] transition"><i class="fa fa-phone text-[10px]"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Listing 2 -->
-                <div class="listing-card">
-                    <div class="aspect-square bg-slate-800 relative">
-                        <img src="https://images.unsplash.com/photo-1512446816042-444d641267d4?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover opacity-80" alt="Phone">
-                    </div>
-                    <div class="p-4">
-                        <p class="text-[10px] font-bold text-[#6366f1] uppercase mb-1">Electronics</p>
-                        <h4 class="text-sm font-bold truncate">iPhone 15 Pro Max 512GB</h4>
-                        <p class="text-xs text-slate-500 mb-3">CBD, Nairobi</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm font-black italic">KSh 185,000</span>
-                            <button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#6366f1] transition"><i class="fa fa-phone text-[10px]"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Listing 3 -->
-                <div class="listing-card">
-                    <div class="aspect-square bg-slate-800 relative">
-                        <div class="absolute top-2 left-2 premium-tag">Featured</div>
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover opacity-80" alt="House">
-                    </div>
-                    <div class="p-4">
-                        <p class="text-[10px] font-bold text-[#6366f1] uppercase mb-1">Property</p>
-                        <h4 class="text-sm font-bold truncate">5 Bedroom Villa + SQ</h4>
-                        <p class="text-xs text-slate-500 mb-3">Karen, Nairobi</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm font-black italic">KSh 85M</span>
-                            <button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#6366f1] transition"><i class="fa fa-phone text-[10px]"></i></button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Listing 4 -->
-                <div class="listing-card">
-                    <div class="aspect-square bg-slate-800 relative">
-                        <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover opacity-80" alt="Laptop">
-                    </div>
-                    <div class="p-4">
-                        <p class="text-[10px] font-bold text-[#6366f1] uppercase mb-1">Tech Suite</p>
-                        <h4 class="text-sm font-bold truncate">Dell XPS 17 9720</h4>
-                        <p class="text-xs text-slate-500 mb-3">Mama Ngina St, Nairobi</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm font-black italic">KSh 320,000</span>
-                            <button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#6366f1] transition"><i class="fa fa-phone text-[10px]"></i></button>
-                        </div>
-                    </div>
-                </div>
-
+            <!-- Product Feed (Populated by JS) -->
+            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4" id="productGrid">
+                <!-- Products will be injected here -->
             </div>
         </main>
     </div>
 
+    <script>
+        const LAPTOPS = [
+            {
+                "id": "lenovo-yoga-7-ultra7",
+                "brand": "Lenovo",
+                "name": "Lenovo Yoga 7 2-in-1 OLED",
+                "specs": "Intel Core Ultra 7 155H • 16GB RAM • 1TB SSD • 14\" 2.8K OLED Touch • BRAND NEW",
+                "price": "KSh 309,400",
+                "img": "https://p1-ofp.static.pub//medias/30154096055_Yoga7_2in1_14AHP9_PureDarkGray_202311010313361715631777266.png"
+            },
+            {
+                "id": "dell-latitude-3450-i7",
+                "brand": "Dell",
+                "name": "Dell Latitude 3450 (i7 13th Gen)",
+                "specs": "Intel Core i7 1355U • 8GB RAM • 512GB SSD • 14\" FHD • BRAND NEW",
+                "price": "KSh 209,729",
+                "img": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/latitude-notebooks/latitude-14-3450-laptop/media-gallery/laptop-latitude-14-3450-black-gallery-1.psd?fmt=png-alpha&wid=1000"
+            },
+            {
+                "id": "exuk-hp-0",
+                "brand": "HP",
+                "name": "HP EliteBook 1040 G6",
+                "specs": "Intel Core i5 • 16GB RAM • 256GB SSD • Touchscreen x360 • Ex-UK Grade A",
+                "price": "KSh 36,000",
+                "img": "https://nexcomventures.co.ke/js/hp-elite.png"
+            },
+            {
+                "id": "exuk-hp-1",
+                "brand": "HP",
+                "name": "HP EliteBook 830 G8",
+                "specs": "Intel Core i7 • 16GB RAM • 512GB SSD • 11th Gen • Ex-UK Grade A",
+                "price": "KSh 42,000",
+                "img": "https://nexcomventures.co.ke/js/hp-elite.png"
+            },
+            {
+                "id": "exuk-hp-4",
+                "brand": "HP",
+                "name": "HP EliteBook 1030 G4",
+                "specs": "Intel Core i7 • 16GB RAM • 512GB SSD • Touchscreen x360 • 8th Gen",
+                "price": "KSh 41,000",
+                "img": "https://nexcomventures.co.ke/js/hp-elite.png"
+            },
+            {
+                "id": "exuk-hp-15",
+                "brand": "HP",
+                "name": "HP EliteBook 840 G5",
+                "specs": "Intel Core i5 • 8GB RAM • 256GB SSD • 8th Gen • Ex-UK Grade A",
+                "price": "KSh 27,000",
+                "img": "https://nexcomventures.co.ke/js/hp-elite.png"
+            },
+            {
+                "id": "exuk-dell-31",
+                "brand": "Dell",
+                "name": "Dell Latitude 7420",
+                "specs": "Intel Core i7 • 16GB RAM • 512GB SSD • 11th Gen • Ex-UK Grade A",
+                "price": "KSh 41,000",
+                "img": "https://nexcomventures.co.ke/js/dell-lat.png"
+            },
+            {
+                "id": "exuk-dell-34",
+                "brand": "Dell",
+                "name": "Dell Latitude 5420",
+                "specs": "Intel Core i5 • 16GB RAM • 512GB SSD • 11th Gen • Ex-UK Grade A",
+                "price": "KSh 32,000",
+                "img": "https://nexcomventures.co.ke/js/dell-lat.png"
+            },
+            {
+                "id": "exuk-lenovo-57",
+                "brand": "Lenovo",
+                "name": "Lenovo ThinkPad X1 Yoga Gen 6",
+                "specs": "Intel Core i7 • 16GB RAM • 512GB SSD • 11th Gen • Touch x360",
+                "price": "KSh 45,000",
+                "img": "https://nexcomventures.co.ke/js/lenovo-think.png"
+            },
+            {
+                "id": "exuk-lenovo-58",
+                "brand": "Lenovo",
+                "name": "Lenovo ThinkPad X1 Carbon Gen 8",
+                "specs": "Intel Core i7 • 16GB RAM • 512GB SSD • 10th Gen • Ex-UK Grade A",
+                "price": "KSh 38,000",
+                "img": "https://nexcomventures.co.ke/js/lenovo-think.png"
+            },
+            {
+                "id": "exuk-apple-72",
+                "brand": "Apple",
+                "name": "MacBook Air M1",
+                "specs": "Apple M1 Chip • 8GB RAM • 256GB SSD • Retina Display • Space Gray",
+                "price": "KSh 78,000",
+                "img": "https://images.unsplash.com/photo-1611186871348-b1ec696e52c9?auto=format&fit=crop&q=80&w=400"
+            },
+            {
+                "id": "exuk-apple-73",
+                "brand": "Apple",
+                "name": "MacBook Pro 2019",
+                "specs": "Intel Core i7 • 16GB RAM • 512GB SSD • 16-inch Retina • Touch Bar",
+                "price": "KSh 95,000",
+                "img": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=400"
+            }
+        ];
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = LAPTOPS.map(p => `
+                <div class="listing-card">
+                    <div class="aspect-square bg-slate-800 relative">
+                        <div class="absolute top-2 left-2 premium-tag">${p.id.includes('exuk') ? 'Ex-UK' : 'New'}</div>
+                        <img src="${p.img}" class="w-full h-full object-contain p-4 opacity-90" alt="${p.name}">
+                    </div>
+                    <div class="p-4 flex-1 flex flex-direction: column">
+                        <p class="text-[10px] font-bold text-[#6366f1] uppercase mb-1">${p.brand}</p>
+                        <h4 class="text-sm font-bold truncate mb-1">${p.name}</h4>
+                        <p class="text-[10px] text-slate-500 mb-3 line-clamp-2 leading-relaxed">${p.specs}</p>
+                        <div class="mt-auto flex justify-between items-center">
+                            <span class="text-sm font-black italic">${p.price}</span>
+                            <button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#6366f1] transition border border-white/5">
+                                <i class="fa fa-shield-halved text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        renderProducts();
+    </script>
 </body>
 </html>

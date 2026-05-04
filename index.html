@@ -3,185 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ol ex | Elite Tech Exchange</title>
+    <title>Ol ex | Premium Exchange</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Sora', sans-serif; background-color: #050505; color: #FFFFFF; }
-        .amber-text { color: #FFB800; }
-        .amber-bg { background-color: #FFB800; }
-        .amber-border { border-color: #FFB800; }
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.02); 
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #121212; 
+            color: #E0E0E0; 
         }
-        .glow-hover:hover {
-            box-shadow: 0 0 30px rgba(255, 184, 0, 0.15);
-            border-color: rgba(255, 184, 0, 0.4);
-            transform: translateY(-2px);
+        .charcoal-bg { background-color: #1A1A1A; }
+        .charcoal-dark { background-color: #121212; }
+        .charcoal-light { background-color: #242424; }
+        .accent-border { border-color: #333333; }
+        .brand-text { color: #FFFFFF; }
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
         }
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 50%, rgba(255, 184, 0, 0.08) 0%, transparent 70%);
+        .btn-primary {
+            background-color: #FFFFFF;
+            color: #000000;
+            transition: all 0.2s ease;
         }
-        input::placeholder { color: #444; }
+        .btn-primary:hover {
+            background-color: #E5E5E5;
+            transform: translateY(-1px);
+        }
+        .package-card {
+            background-color: #1A1A1A;
+            border: 1px solid #2A2A2A;
+            transition: all 0.3s ease;
+        }
+        .package-card:hover {
+            border-color: #444444;
+            background-color: #1E1E1E;
+        }
     </style>
 </head>
-<body class="selection:bg-amber-400 selection:text-black">
+<body class="selection:bg-white selection:text-black">
 
-    <!-- Minimalist Header -->
-    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/80 backdrop-blur-xl">
+    <!-- Stealth Navigation -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-[#121212]/90 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" class="text-2xl font-extrabold tracking-tight flex items-center gap-2">
-                <span class="amber-bg text-black px-2 py-0.5 rounded italic">O</span>
-                <span>OLEX</span>
-            </a>
-            
-            <div class="hidden md:flex items-center gap-10 text-[10px] font-black uppercase tracking-[0.3em] text-white/40">
-                <a href="#marketplace" class="hover:text-white transition">Market</a>
-                <a href="#plans" class="hover:text-white transition">Sell</a>
-                <a href="#" class="hover:text-white transition">Wholesale</a>
+            <div class="flex items-center gap-12">
+                <a href="#" class="text-2xl font-black tracking-tighter flex items-center gap-2">
+                    Ol<span class="text-white/40">ex</span>
+                </a>
+                <div class="hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-widest text-white/40">
+                    <a href="#buy" class="hover:text-white transition">Marketplace</a>
+                    <a href="#sell" class="hover:text-white transition">Seller Hub</a>
+                </div>
             </div>
-
+            
             <div class="flex items-center gap-6">
-                <button class="text-[10px] font-black uppercase tracking-widest hover:text-amber-400 transition">Login</button>
-                <button class="amber-bg text-black px-6 py-2.5 rounded-full font-extrabold text-[11px] uppercase tracking-wider hover:scale-105 transition-all">
-                    Post Ad
+                <a href="#" class="text-[11px] font-black uppercase tracking-widest text-white/60 hover:text-white">Sign In</a>
+                <button class="btn-primary px-6 py-2.5 rounded-lg font-bold text-[11px] uppercase tracking-wider">
+                    Post Listing
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- High-Impact Hero -->
-    <header class="relative pt-40 pb-32 hero-gradient overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="max-w-3xl">
-                <div class="inline-block border amber-border px-3 py-1 rounded mb-8">
-                    <span class="amber-text text-[9px] font-black uppercase tracking-[0.4em]">Elite Exchange Kenya</span>
-                </div>
-                <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-10">
-                    GIVE YOUR GADGETS <br><span class="amber-text italic">NEW LIFE.</span>
+    <!-- Refined Hero -->
+    <header class="pt-48 pb-32">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-2xl">
+                <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30 mb-6 block">Nairobi Tech Exchange</span>
+                <h1 class="text-6xl md:text-8xl font-[900] tracking-tighter text-white leading-none mb-10">
+                    SMARTER <br>TRADING.
                 </h1>
-                <p class="text-lg text-white/40 mb-12 max-w-xl leading-relaxed">
-                    Designed for serious traders. A minimalist, fast, and high-performance marketplace for premium electronics and vehicles.
+                <p class="text-lg text-white/40 mb-12 leading-relaxed">
+                    A refined, charcoal-themed ecosystem for high-value gadget and vehicle exchange. Verified sellers, direct contact, zero friction.
                 </p>
                 
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="relative flex-1 max-w-md">
-                        <input type="text" placeholder="Search premium inventory..." class="w-full bg-white/5 border border-white/10 rounded-xl py-4 px-6 outline-none focus:border-amber-500 transition-all">
-                    </div>
-                    <button class="amber-bg text-black px-10 py-4 rounded-xl font-black uppercase text-xs tracking-widest hover:brightness-110 transition">Discover</button>
+                <div class="relative group max-w-lg">
+                    <input type="text" placeholder="Search verified inventory..." class="w-full bg-white/5 border border-white/10 rounded-xl py-4 px-6 outline-none focus:border-white/30 transition-all text-white">
+                    <button class="absolute right-3 top-2.5 bg-white/10 hover:bg-white/20 p-2.5 rounded-lg transition">
+                        <i class="fa fa-search text-white/60"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- The Packages (Redesigned) -->
-    <section id="plans" class="py-32 bg-[#080808]">
+    <!-- Strategic Tiers -->
+    <section id="sell" class="py-32 charcoal-bg">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-                <div>
-                    <h2 class="text-4xl font-black mb-4 uppercase">Seller Tiers</h2>
-                    <p class="text-white/40">From single items to nationwide wholesale.</p>
-                </div>
-                <div class="flex gap-2 p-1 bg-white/5 rounded-full border border-white/10">
-                    <button class="px-6 py-2 rounded-full amber-bg text-black text-[10px] font-black uppercase">Standard</button>
-                    <button class="px-6 py-2 rounded-full text-white/40 text-[10px] font-black uppercase">Bulk Import</button>
-                </div>
+            <div class="mb-20">
+                <h2 class="text-3xl font-black text-white mb-4">SELLER TIERS</h2>
+                <div class="w-20 h-1 bg-white/20"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-1 shadow-2xl shadow-amber-500/5 bg-white/5 border border-white/10 rounded-[40px] overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <!-- PERSONAL SELLER -->
-                <div class="p-12 hover:bg-white/[0.02] transition-all border-b md:border-b-0 md:border-r border-white/5">
-                    <div class="mb-12"><i class="fa fa-user-circle text-3xl amber-text"></i></div>
-                    <h3 class="text-xl font-bold mb-4 uppercase tracking-tighter">Individual</h3>
-                    <p class="text-sm text-white/40 mb-10 leading-relaxed">Selling your personal phone, laptop, or car? Get verified and sell fast.</p>
-                    <div class="text-4xl font-black mb-10">KSH 0 <span class="text-xs text-white/20">/AD</span></div>
-                    <ul class="space-y-4 mb-12 text-[10px] font-bold uppercase tracking-widest text-white/60">
-                        <li class="flex items-center gap-3"><i class="fa fa-check amber-text"></i> 1 Active Ad</li>
-                        <li class="flex items-center gap-3"><i class="fa fa-check amber-text"></i> 7-Day Duration</li>
-                        <li class="flex items-center gap-3"><i class="fa fa-check amber-text"></i> Verified Owner Tag</li>
+                <!-- INDIVIDUAL -->
+                <div class="package-card p-10 rounded-2xl">
+                    <div class="text-[10px] font-black text-white/20 uppercase tracking-[0.3em] mb-8">Personal</div>
+                    <h3 class="text-2xl font-bold text-white mb-4 italic tracking-tighter">Solo Seller</h3>
+                    <p class="text-sm text-white/40 mb-10">Selling your own phone or car? Simple, verified, and free.</p>
+                    <div class="text-4xl font-black text-white mb-10">FREE</div>
+                    <ul class="space-y-4 mb-12 text-[10px] font-bold uppercase tracking-widest text-white/30">
+                        <li><i class="fa fa-minus mr-3"></i> 1 Active Listing</li>
+                        <li><i class="fa fa-minus mr-3"></i> 14 Days Live</li>
+                        <li><i class="fa fa-minus mr-3"></i> Basic Verification</li>
                     </ul>
-                    <button class="w-full py-4 border border-white/20 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition">Start Selling</button>
+                    <button class="w-full py-4 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition">Get Started</button>
                 </div>
 
-                <!-- PREMIUM SHOP (Dealer) -->
-                <div class="p-12 bg-white/[0.04] relative transition-all border-b md:border-b-0 md:border-r border-white/5">
-                    <div class="absolute top-0 right-0 amber-bg text-black text-[8px] font-black px-4 py-2 uppercase tracking-widest">Recommended</div>
-                    <div class="mb-12"><i class="fa fa-gem text-3xl amber-text"></i></div>
-                    <h3 class="text-xl font-bold mb-4 uppercase tracking-tighter">Pro Merchant</h3>
-                    <p class="text-sm text-white/40 mb-10 leading-relaxed">For professional shops and frequent traders. Higher visibility and trust.</p>
-                    <div class="text-4xl font-black mb-10">KSH 1,500 <span class="text-xs text-white/20">/MO</span></div>
+                <!-- PROFESSIONAL (Nexcom Level) -->
+                <div class="package-card p-10 rounded-2xl border-white/20 bg-white/[0.03]">
+                    <div class="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-8">Professional</div>
+                    <h3 class="text-2xl font-bold text-white mb-4 italic tracking-tighter">Shop Merchant</h3>
+                    <p class="text-sm text-white/40 mb-10">For retailers selling inventory daily. Enhanced trust & tools.</p>
+                    <div class="text-4xl font-black text-white mb-2">KSH 1,500</div>
+                    <div class="text-[10px] text-white/20 mb-10">Monthly Billing</div>
                     <ul class="space-y-4 mb-12 text-[10px] font-bold uppercase tracking-widest text-white/60">
-                        <li class="flex items-center gap-3"><i class="fa fa-check amber-text"></i> 50 Active Ads</li>
-                        <li class="flex items-center gap-3"><i class="fa fa-check amber-text"></i> Boosted Priority</li>
-                        <li class="flex items-center gap-3"><i class="fa fa-check amber-text"></i> Shop Custom Page</li>
+                        <li><i class="fa fa-check mr-3"></i> 100 Active Listings</li>
+                        <li><i class="fa fa-check mr-3"></i> Verified Shop Badge</li>
+                        <li><i class="fa fa-check mr-3"></i> Featured Shop Page</li>
                     </ul>
-                    <button class="w-full py-4 amber-bg text-black rounded-xl text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition">Go Pro</button>
+                    <button class="w-full py-4 bg-white text-black rounded-xl text-[10px] font-black uppercase tracking-widest">Select Plan</button>
                 </div>
 
-                <!-- WHOLESALE (Enterprise) -->
-                <div class="p-12 hover:bg-white/[0.02] transition-all">
-                    <div class="mb-12"><i class="fa fa-warehouse text-3xl amber-text"></i></div>
-                    <h3 class="text-xl font-bold mb-4 uppercase tracking-tighter">Bulk Hub</h3>
-                    <p class="text-sm text-white/40 mb-10 leading-relaxed">For importers and distributors. Powerful inventory management tools.</p>
-                    <div class="text-4xl font-black mb-10">KSH 4,999 <span class="text-xs text-white/20">/MO</span></div>
-                    <ul class="space-y-4 mb-12 text-[10px] font-bold uppercase tracking-widest text-white/60">
-                        <li class="flex items-center gap-3"><i class="fa fa-check amber-text"></i> Unlimited Ads</li>
-                        <li class="flex items-center gap-3"><i class="fa fa-check amber-text"></i> CSV/Excel Bulk Import</li>
-                        <li class="flex items-center gap-3"><i class="fa fa-check amber-text"></i> API Inventory Link</li>
+                <!-- WHOLESALE -->
+                <div class="package-card p-10 rounded-2xl">
+                    <div class="text-[10px] font-black text-white/20 uppercase tracking-[0.3em] mb-8">Enterprise</div>
+                    <h3 class="text-2xl font-bold text-white mb-4 italic tracking-tighter">Wholesale Hub</h3>
+                    <p class="text-sm text-white/40 mb-10">For bulk importers and distributors. Efficiency at scale.</p>
+                    <div class="text-4xl font-black text-white mb-2">KSH 5,000</div>
+                    <div class="text-[10px] text-white/20 mb-10">Monthly Billing</div>
+                    <ul class="space-y-4 mb-12 text-[10px] font-bold uppercase tracking-widest text-white/30">
+                        <li><i class="fa fa-minus mr-3"></i> Unlimited Listings</li>
+                        <li><i class="fa fa-minus mr-3"></i> Bulk CSV/Excel Upload</li>
+                        <li><i class="fa fa-minus mr-3"></i> Priority Merchant Support</li>
                     </ul>
-                    <button class="w-full py-4 border border-white/20 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition">Enterprise</button>
+                    <button class="w-full py-4 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition">Inquire</button>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <!-- Marketplace Preview -->
-    <section id="marketplace" class="py-32">
+    <!-- Marketplace -->
+    <section id="buy" class="py-32">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-center mb-16">
-                <h2 class="text-2xl font-black uppercase tracking-tighter">Featured <span class="amber-text">Assets</span></h2>
-                <div class="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">View All →</div>
+            <div class="flex justify-between items-end mb-16">
+                <h2 class="text-2xl font-black text-white italic tracking-tighter">RECENTLY ADDED</h2>
+                <a href="#" class="text-[10px] font-black uppercase tracking-widest text-white/30 hover:text-white">All Units →</a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Product Card -->
-                <div class="glass-card p-4 rounded-3xl glow-hover transition-all group cursor-pointer">
-                    <div class="h-60 bg-white/[0.02] rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center">
-                        <i class="fa fa-laptop text-5xl text-white/5 group-hover:scale-110 transition-transform duration-700"></i>
-                        <div class="absolute bottom-4 left-4 flex gap-2">
-                            <span class="bg-black/60 backdrop-blur-md text-[8px] font-black px-2 py-1 rounded-sm uppercase tracking-widest border border-white/10">Grade A</span>
-                        </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Item -->
+                <div class="package-card p-5 rounded-2xl group cursor-pointer">
+                    <div class="h-48 bg-[#121212] rounded-xl mb-6 flex items-center justify-center border border-white/5 overflow-hidden">
+                        <i class="fa fa-laptop text-4xl text-white/5 group-hover:scale-110 transition-transform duration-500"></i>
                     </div>
                     <div class="px-2">
-                        <h4 class="font-bold text-sm mb-1 uppercase tracking-tight group-hover:amber-text transition">MacBook Pro M2</h4>
-                        <p class="text-xl font-black amber-text mb-4">KSH 145,000</p>
-                        <div class="flex items-center justify-between text-[9px] font-black uppercase tracking-widest text-white/20">
-                            <span>Nairobi CBD</span>
-                            <span class="flex items-center gap-1"><i class="fa fa-clock"></i> 2H ago</span>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[8px] font-black uppercase tracking-widest text-white/20">Certified Shop</span>
+                            <span class="text-[8px] font-black uppercase tracking-widest text-white/20">Nairobi</span>
                         </div>
+                        <h4 class="font-bold text-white mb-2">HP EliteBook 840 G8</h4>
+                        <p class="text-lg font-black text-white">KSH 72,000</p>
                     </div>
                 </div>
-                <!-- Repeat cards... -->
+                <!-- Repeat -->
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-20 border-t border-white/5 bg-[#030303]">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12">
-            <div class="text-xl font-extrabold tracking-tighter flex items-center gap-2">
-                <span class="amber-bg text-black px-2 py-0.5 rounded italic">O</span>
-                <span>OLEX</span>
+    <!-- Minimal Footer -->
+    <footer class="py-20 border-t border-white/5 charcoal-dark">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="text-xl font-black tracking-tighter">
+                Ol<span class="text-white/40">ex</span>
             </div>
-            <p class="text-[10px] font-bold text-white/20 uppercase tracking-[0.4em]">Designed by Nexcom Ventures &copy; 2026</p>
-            <div class="flex gap-8">
-                <a href="#" class="text-white/20 hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="#" class="text-white/20 hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+            <p class="text-[9px] font-bold text-white/20 uppercase tracking-[0.5em]">Built by Nexcom Ventures &copy; 2026</p>
+            <div class="flex gap-8 text-white/40 text-xs">
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
             </div>
         </div>
     </footer>

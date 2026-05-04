@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ol ex | Kenya's Premium Gadget Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="text-2xl font-bold text-emerald-600 tracking-tighter">Ol<span class="text-gray-900">ex</span></div>
+            <div class="flex-1 max-w-lg mx-8 hidden md:block">
+                <div class="relative">
+                    <input type="text" placeholder="Search MacBooks, HP, Dell..." class="w-full bg-gray-100 rounded-full py-2 px-10 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <i class="fa fa-search absolute left-4 top-3 text-gray-400"></i>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="text-gray-600 font-medium hover:text-emerald-600">Login</button>
+                <button class="bg-emerald-600 text-white px-6 py-2 rounded-full font-bold hover:bg-emerald-700 transition">SELL NOW</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-emerald-600 py-12 text-white">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Buy & Sell Gadgets with Escrow</h1>
+            <p class="text-emerald-100 text-lg mb-8">Verified Sellers. Secure Payments. 100% Peace of Mind.</p>
+        </div>
+    </header>
+
+    <!-- Categories -->
+    <section class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div class="bg-white p-6 rounded-2xl text-center shadow-sm hover:shadow-md transition cursor-pointer border-2 border-transparent hover:border-emerald-500">
+                <i class="fa fa-laptop text-3xl text-emerald-600 mb-2"></i>
+                <p class="font-bold">Laptops</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl text-center shadow-sm hover:shadow-md transition cursor-pointer border-2 border-transparent hover:border-emerald-500">
+                <i class="fa fa-mobile-screen text-3xl text-emerald-600 mb-2"></i>
+                <p class="font-bold">Phones</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl text-center shadow-sm hover:shadow-md transition cursor-pointer border-2 border-transparent hover:border-emerald-500">
+                <i class="fa fa-headphones text-3xl text-emerald-600 mb-2"></i>
+                <p class="font-bold">Audio</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl text-center shadow-sm hover:shadow-md transition cursor-pointer border-2 border-transparent hover:border-emerald-500">
+                <i class="fa fa-camera text-3xl text-emerald-600 mb-2"></i>
+                <p class="font-bold">Cameras</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl text-center shadow-sm hover:shadow-md transition cursor-pointer border-2 border-transparent hover:border-emerald-500">
+                <i class="fa fa-tablet-screen text-3xl text-emerald-600 mb-2"></i>
+                <p class="font-bold">Tablets</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl text-center shadow-sm hover:shadow-md transition cursor-pointer border-2 border-transparent hover:border-emerald-500">
+                <i class="fa fa-plug text-3xl text-emerald-600 mb-2"></i>
+                <p class="font-bold">Accessories</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Listings Grid -->
+    <section class="max-w-7xl mx-auto px-4 pb-20">
+        <div class="flex justify-between items-end mb-8">
+            <h2 class="text-2xl font-bold text-gray-900">Featured Listings</h2>
+            <a href="#" class="text-emerald-600 font-bold hover:underline">View all</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Product Card 1 -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition group border">
+                <div class="relative h-48 bg-gray-100 flex items-center justify-center">
+                    <i class="fa fa-laptop text-5xl text-gray-300"></i>
+                    <span class="absolute top-2 left-2 bg-emerald-500 text-white text-xs px-2 py-1 rounded font-bold uppercase">Escrow Ready</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-gray-900 group-hover:text-emerald-600 transition truncate">MacBook Pro M2 - 16GB/512GB</h3>
+                    <p class="text-emerald-600 font-black text-xl mt-1">KSh 185,000</p>
+                    <div class="flex items-center gap-2 mt-3 text-gray-500 text-sm">
+                        <i class="fa fa-location-dot"></i>
+                        <span>Nairobi CBD</span>
+                    </div>
+                    <hr class="my-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center">
+                                <i class="fa fa-check text-[10px] text-emerald-600"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-600">Nexcom Verified</span>
+                        </div>
+                        <i class="fa-regular fa-heart text-gray-400 hover:text-red-500 cursor-pointer transition"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition group border">
+                <div class="relative h-48 bg-gray-100 flex items-center justify-center">
+                    <i class="fa fa-mobile-screen text-5xl text-gray-300"></i>
+                    <span class="absolute top-2 left-2 bg-emerald-500 text-white text-xs px-2 py-1 rounded font-bold uppercase">Escrow Ready</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-gray-900 group-hover:text-emerald-600 transition truncate">iPhone 15 Pro Max 256GB</h3>
+                    <p class="text-emerald-600 font-black text-xl mt-1">KSh 165,000</p>
+                    <div class="flex items-center gap-2 mt-3 text-gray-500 text-sm">
+                        <i class="fa fa-location-dot"></i>
+                        <span>Mombasa Road</span>
+                    </div>
+                    <hr class="my-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center">
+                                <i class="fa fa-check text-[10px] text-emerald-600"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-600">Verified Seller</span>
+                        </div>
+                        <i class="fa-regular fa-heart text-gray-400 hover:text-red-500 cursor-pointer transition"></i>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-gray-900 py-16 text-white mt-12">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Start Selling on Ol ex Today</h2>
+            <p class="text-gray-400 mb-8">Join the most trusted gadget community in Kenya. No scams, no fakes, just real deals.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold hover:bg-emerald-700 transition">Post an Ad for Free</button>
+                <button class="border border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-gray-900 transition">How it Works</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>&copy; 2026 Ol ex Kenya. Built by Nexcom Ventures.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

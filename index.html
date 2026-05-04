@@ -18,6 +18,7 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: var(--bg); 
             color: white;
+            overflow-x: hidden;
         }
         .jiji-grid {
             display: grid;
@@ -58,14 +59,16 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             overflow: hidden;
-            transition: transform 0.2s;
+            transition: all 0.2s;
             display: flex;
             flex-direction: column;
             height: 100%;
+            cursor: pointer;
         }
         .listing-card:hover {
             transform: translateY(-4px);
             border-color: var(--indigo);
+            box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.2);
         }
         .search-bar {
             background: var(--surface);
@@ -76,6 +79,10 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            transition: border-color 0.2s;
+        }
+        .search-bar:focus-within {
+            border-color: var(--indigo);
         }
         .search-bar input {
             background: transparent;
@@ -93,6 +100,22 @@
             border-radius: 4px;
             text-transform: uppercase;
         }
+        /* Modal Styles */
+        .modal-overlay {
+            background: rgba(5, 5, 7, 0.95);
+            backdrop-filter: blur(8px);
+        }
+        .modal-content {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body class="pt-24">
@@ -104,13 +127,12 @@
                 <a href="index.html" class="text-2xl font-black italic tracking-tighter">OL<span class="text-[#6366f1]">EX</span></a>
                 <div class="search-bar max-w-xl hidden md:flex">
                     <i class="fa fa-search text-slate-500"></i>
-                    <input type="text" placeholder="Search for premium laptops, cars, or property...">
-                    <button class="bg-[#6366f1] px-4 py-1.5 rounded-lg text-xs font-bold">Search</button>
+                    <input type="text" id="searchInput" placeholder="Search for premium laptops (e.g. i7, 16GB, MacBook)...">
                 </div>
             </div>
             <div class="flex items-center gap-4">
-                <button class="text-sm font-bold text-slate-400">Sign in</button>
-                <button class="bg-white text-black px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider">Sell</button>
+                <a href="login.html" class="text-sm font-bold text-slate-400">Sign in</a>
+                <a href="signup.html" class="bg-white text-black px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider">Sell</a>
             </div>
         </div>
     </nav>
@@ -134,10 +156,10 @@
         <!-- Feed Section -->
         <main>
             <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-bold">Nexcom Premium Laptops</h2>
+                <h2 class="text-xl font-bold" id="resultsTitle">Nexcom Premium Laptops</h2>
                 <div class="flex gap-2">
                     <span class="text-xs font-bold text-slate-500">Filter:</span>
-                    <select class="bg-transparent text-xs font-bold outline-none" id="brandFilter">
+                    <select class="bg-transparent text-xs font-bold outline-none cursor-pointer hover:text-white transition" id="brandFilter">
                         <option value="all">All Brands</option>
                         <option value="hp">HP</option>
                         <option value="dell">Dell</option>
@@ -151,7 +173,73 @@
             <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4" id="productGrid">
                 <!-- Products will be injected here -->
             </div>
+            
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden py-20 text-center">
+                <i class="fa fa-search text-4xl text-slate-700 mb-4"></i>
+                <h3 class="text-lg font-bold">No results found</h3>
+                <p class="text-sm text-slate-500">Try adjusting your search or filters.</p>
+            </div>
         </main>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 md:p-8">
+        <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
+        <div class="modal-content relative bg-[#111115] border border-white/10 w-full max-w-4xl rounded-[32px] overflow-hidden shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition">
+                <i class="fa fa-times"></i>
+            </button>
+
+            <div class="grid md:grid-cols-2">
+                <!-- Image Side -->
+                <div class="bg-slate-900/50 p-8 flex items-center justify-center min-h-[400px]">
+                    <img id="modalImg" src="" class="max-w-full max-h-[400px] object-contain drop-shadow-2xl" alt="">
+                </div>
+                <!-- Content Side -->
+                <div class="p-8 md:p-12 border-l border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span id="modalBadge" class="premium-tag"></span>
+                        <span id="modalBrand" class="text-[10px] font-black uppercase tracking-widest text-[#6366f1]"></span>
+                    </div>
+                    <h2 id="modalName" class="text-3xl font-black mb-2"></h2>
+                    <p id="modalPrice" class="text-2xl font-black italic text-white mb-8"></p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-3">Specifications</h4>
+                            <p id="modalSpecs" class="text-sm text-slate-300 leading-relaxed"></p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white/5 rounded-2xl p-4 border border-white/5">
+                                <i class="fa fa-shield-check text-[#6366f1] mb-2"></i>
+                                <h5 class="text-[10px] font-bold uppercase text-slate-500 mb-1">Status</h5>
+                                <p class="text-xs font-bold">Verified Merchant</p>
+                            </div>
+                            <div class="bg-white/5 rounded-2xl p-4 border border-white/5">
+                                <i class="fa fa-location-dot text-[#6366f1] mb-2"></i>
+                                <h5 class="text-[10px] font-bold uppercase text-slate-500 mb-1">Location</h5>
+                                <p class="text-xs font-bold text-nowrap">Mama Ngina St, Nairobi</p>
+                            </div>
+                        </div>
+
+                        <!-- Safety Banner -->
+                        <div class="bg-indigo-500/10 border border-indigo-500/20 rounded-2xl p-4 flex gap-4">
+                            <i class="fa fa-circle-info text-indigo-400 mt-1"></i>
+                            <div>
+                                <h5 class="text-xs font-bold text-indigo-400">Safety First</h5>
+                                <p class="text-[10px] text-indigo-300/70">Always inspect the laptop before payment. We recommend meeting at Nexcom Ventures shop for secure handovers.</p>
+                            </div>
+                        </div>
+
+                        <button class="w-full bg-[#6366f1] text-white py-4 rounded-2xl font-black uppercase tracking-wider hover:scale-[1.02] active:scale-[0.98] transition">
+                            Inquire via Secure Chat
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -254,28 +342,95 @@
             }
         ];
 
+        let filteredLaptops = [...LAPTOPS];
+
         function renderProducts() {
             const grid = document.getElementById('productGrid');
-            grid.innerHTML = LAPTOPS.map(p => `
-                <div class="listing-card">
-                    <div class="aspect-square bg-slate-800 relative">
+            const emptyState = document.getElementById('emptyState');
+            
+            if (filteredLaptops.length === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = filteredLaptops.map(p => `
+                <div class="listing-card" onclick="openModal('${p.id}')">
+                    <div class="aspect-square bg-slate-800/30 relative">
                         <div class="absolute top-2 left-2 premium-tag">${p.id.includes('exuk') ? 'Ex-UK' : 'New'}</div>
-                        <img src="${p.img}" class="w-full h-full object-contain p-4 opacity-90" alt="${p.name}">
+                        <img src="${p.img}" class="w-full h-full object-contain p-4 opacity-90 transition group-hover:scale-105" alt="${p.name}">
                     </div>
-                    <div class="p-4 flex-1 flex flex-direction: column">
+                    <div class="p-4 flex-1 flex flex-col">
                         <p class="text-[10px] font-bold text-[#6366f1] uppercase mb-1">${p.brand}</p>
                         <h4 class="text-sm font-bold truncate mb-1">${p.name}</h4>
                         <p class="text-[10px] text-slate-500 mb-3 line-clamp-2 leading-relaxed">${p.specs}</p>
                         <div class="mt-auto flex justify-between items-center">
                             <span class="text-sm font-black italic">${p.price}</span>
-                            <button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#6366f1] transition border border-white/5">
-                                <i class="fa fa-shield-halved text-[10px]"></i>
-                            </button>
+                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/5">
+                                <i class="fa fa-shield-halved text-[10px] text-slate-500"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             `).join('');
         }
+
+        // Search & Filter Logic
+        const searchInput = document.getElementById('searchInput');
+        const brandFilter = document.getElementById('brandFilter');
+
+        function updateFilters() {
+            const query = searchInput.value.toLowerCase();
+            const brand = brandFilter.value.toLowerCase();
+
+            filteredLaptops = LAPTOPS.filter(p => {
+                const matchesSearch = p.name.toLowerCase().includes(query) || 
+                                    p.specs.toLowerCase().includes(query) ||
+                                    p.brand.toLowerCase().includes(query);
+                
+                const matchesBrand = brand === 'all' || p.brand.toLowerCase() === brand;
+
+                return matchesSearch && matchesBrand;
+            });
+
+            renderProducts();
+            document.getElementById('resultsTitle').innerText = 
+                query || brand !== 'all' ? `Results for "${query || brand}"` : "Nexcom Premium Laptops";
+        }
+
+        searchInput.addEventListener('input', updateFilters);
+        brandFilter.addEventListener('change', updateFilters);
+
+        // Modal Logic
+        function openModal(id) {
+            const p = LAPTOPS.find(laptop => laptop.id === id);
+            if (!p) return;
+
+            document.getElementById('modalImg').src = p.img;
+            document.getElementById('modalName').innerText = p.name;
+            document.getElementById('modalPrice').innerText = p.price;
+            document.getElementById('modalSpecs').innerText = p.specs;
+            document.getElementById('modalBrand').innerText = p.brand;
+            document.getElementById('modalBadge').innerText = p.id.includes('exuk') ? 'Ex-UK' : 'New';
+
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('productModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Restore scroll
+        }
+
+        // Close on Escape
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
 
         renderProducts();
     </script>

@@ -194,28 +194,70 @@
                 <a href="index.html" class="text-2xl font-black italic tracking-tighter">OL<span class="text-[#6366f1]">EX</span></a>
                 <div class="search-bar max-w-xl hidden md:flex">
                     <i class="fa fa-search text-slate-500"></i>
-                    <input type="text" id="searchInput" placeholder="Search for premium laptops (e.g. i7, 16GB, MacBook)...">
+                    <input type="text" id="searchInput" placeholder="Search for Laptops, Phones, Cars, Land...">
                 </div>
             </div>
             <div class="flex items-center gap-4">
                 <a href="login.html" class="text-sm font-bold text-slate-400">Sign in</a>
-                <a href="signup.html" class="bg-white text-black px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider">Sell</a>
+                <button onclick="openPostItem()" class="bg-white text-black px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider">Sell</button>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Category Scroller -->
+    <div class="lg:hidden mt-20 px-6 py-4 overflow-x-auto no-scrollbar bg-[#050507] border-b border-white/5">
+        <div class="flex gap-4">
+            <button class="flex flex-col items-center gap-2 min-w-[70px]">
+                <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-indigo-400">
+                    <i class="fa fa-laptop"></i>
+                </div>
+                <span class="text-[9px] font-black uppercase text-slate-400">Laptops</span>
+            </button>
+            <button class="flex flex-col items-center gap-2 min-w-[70px]">
+                <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-green-400">
+                    <i class="fa fa-mobile-screen"></i>
+                </div>
+                <span class="text-[9px] font-black uppercase text-slate-400">Phones</span>
+            </button>
+            <button class="flex flex-col items-center gap-2 min-w-[70px]">
+                <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-blue-400">
+                    <i class="fa fa-car"></i>
+                </div>
+                <span class="text-[9px] font-black uppercase text-slate-400">Cars</span>
+            </button>
+            <button class="flex flex-col items-center gap-2 min-w-[70px]">
+                <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-pink-400">
+                    <i class="fa fa-shirt"></i>
+                </div>
+                <span class="text-[9px] font-black uppercase text-slate-400">Dresses</span>
+            </button>
+            <button class="flex flex-col items-center gap-2 min-w-[70px]">
+                <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-amber-400">
+                    <i class="fa fa-mountain-city"></i>
+                </div>
+                <span class="text-[9px] font-black uppercase text-slate-400">Land</span>
+            </button>
+            <button class="flex flex-col items-center gap-2 min-w-[70px]">
+                <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-slate-400">
+                    <i class="fa fa-hard-drive"></i>
+                </div>
+                <span class="text-[9px] font-black uppercase text-slate-400">Hard Disks</span>
+            </button>
+        </div>
+    </div>
 
     <div class="jiji-grid">
         
         <!-- Sidebar Navigation -->
         <aside class="sidebar hidden lg:block">
-            <h3 class="px-3 text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4">Navigation</h3>
+            <h3 class="px-3 text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4">Categories</h3>
             <nav class="space-y-1">
-                <a href="merchant.html" class="category-link flex items-center gap-3 px-3 py-2 text-indigo-400 border border-indigo-500/20 bg-indigo-500/5 rounded-lg mb-4 text-xs font-black uppercase tracking-tighter"><i class="fa fa-chart-line"></i> Dashboard</a>
-                <a href="#" class="category-link active"><i class="fa fa-laptop w-5"></i> Electronics</a>
-                <a href="#" class="category-link"><i class="fa fa-car w-5"></i> Vehicles</a>
-                <a href="#" class="category-link"><i class="fa fa-house w-5"></i> Property</a>
+                <a href="#" class="category-link active"><i class="fa fa-laptop w-5"></i> Laptops & Computers</a>
                 <a href="#" class="category-link"><i class="fa fa-mobile-screen w-5"></i> Mobile Phones</a>
-                <a href="#" class="category-link"><i class="fa fa-couch w-5"></i> Home & Furniture</a>
+                <a href="#" class="category-link"><i class="fa fa-car w-5"></i> Vehicles & Cars</a>
+                <a href="#" class="category-link"><i class="fa fa-shirt w-5"></i> Fashion (Dresses)</a>
+                <a href="#" class="category-link"><i class="fa fa-mountain-city w-5"></i> Real Estate & Land</a>
+                <a href="#" class="category-link"><i class="fa fa-hard-drive w-5"></i> Hard Disks & Parts</a>
                 <a href="#" class="category-link"><i class="fa fa-briefcase w-5"></i> Services</a>
             </nav>
         </aside>
@@ -346,6 +388,18 @@
             // Your business number
             window.location.href = 'tel:0722816001';
             closeSafetyModal();
+        }
+
+        function openPostItem() {
+            const categories = [
+                "💻 Laptops & Computers",
+                "📱 Mobile Phones",
+                "🚗 Vehicles & Cars",
+                "👗 Fashion (Dresses)",
+                "🏙️ Real Estate & Land",
+                "💾 Hard Disks & Storage"
+            ];
+            alert("To sell your item, select a category:\n\n" + categories.join("\n") + "\n\nOLEX will then guide you through uploading photos and details.");
         }
         
         const LAPTOPS = [

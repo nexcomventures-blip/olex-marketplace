@@ -25,7 +25,9 @@
 
         /* Speed Optimizations */
         .fast-load { content-visibility: auto; }
-        img { border-radius: 12px; object-fit: contain; background: #f1f5f9; }
+        img { border-radius: 12px; object-fit: cover; background: #f1f5f9; }
+        .ad-img { aspect-ratio: 1; width: 100%; border-radius: 10px; margin-bottom: 8px; }
+        .ad-price { font-weight: 800; font-size: 15px; color: var(--brand); }
 
         /* Logo Design */
         .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
@@ -166,7 +168,7 @@
         <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl relative animate-in slide-in-from-bottom duration-300">
             <button onclick="closeM()" class="absolute top-4 right-4 w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600"><i class="fa fa-times"></i></button>
             <div class="p-4 sm:p-6">
-                <img id="m-img" class="w-full aspect-square object-contain bg-slate-50 rounded-2xl mb-4">
+                <img id="m-img" class="w-full aspect-square object-cover bg-slate-50 rounded-2xl mb-4">
                 <span id="m-badge" class="text-[10px] font-black uppercase text-blue-600 mb-2 block"></span>
                 <h3 id="m-name" class="text-xl font-bold mb-1"></h3>
                 <p id="m-price" class="text-2xl font-black text-blue-600 mb-4"></p>

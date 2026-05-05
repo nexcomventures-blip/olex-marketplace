@@ -159,13 +159,18 @@
     </nav>
 
     <main class="content-width">
-        <div class="search-wrap">
-            <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-            <input type="text" class="search-input" id="qInput" placeholder="Search laptops, phones, cars..." onkeyup="search(this.value)">
-            <button onclick="voiceSearch()" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-600 transition">
-                <i class="fa fa-microphone"></i>
-            </button>
-        </div>
+            <div class="search-wrap">
+                <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" class="search-input" id="qInput" placeholder="Search laptops, phones, cars..." onkeyup="search(this.value)">
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                    <button onclick="document.getElementById('requestModal').classList.remove('hidden')" class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-100 transition">
+                        <i class="fa-solid fa-hand-holding-heart text-xs"></i>
+                    </button>
+                    <button onclick="voiceSearch()" class="text-slate-400 hover:text-blue-600 transition">
+                        <i class="fa fa-microphone"></i>
+                    </button>
+                </div>
+            </div>
 
         <div class="cat-scroll" id="cats"></div>
 
@@ -395,6 +400,29 @@
         </div>
     </div>
 
+    <!-- Requested Items Modal -->
+    <div id="requestModal" class="fixed inset-0 z-[120] hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl relative flex flex-col max-h-[80vh]">
+            <div class="p-6 border-b flex items-center justify-between bg-slate-50 dark:bg-slate-800">
+                <div>
+                    <h3 class="font-black text-xl">🔎 "I'm Looking For..."</h3>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Wanted Items Board</p>
+                </div>
+                <button onclick="document.getElementById('requestModal').classList.add('hidden')" class="w-10 h-10 bg-white dark:bg-slate-700 rounded-full flex items-center justify-center shadow-md"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="p-6 overflow-y-auto" id="requestBoard">
+                <!-- Requests show here -->
+            </div>
+            <div class="p-6 border-t bg-slate-50 dark:bg-slate-800">
+                <p class="text-[10px] font-black uppercase text-slate-400 mb-3">Post a request</p>
+                <div class="flex gap-2">
+                    <input type="text" id="reqInput" placeholder="e.g. MacBook M1 under 90k..." class="flex-1 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 p-3 rounded-xl text-sm outline-none">
+                    <button onclick="postRequest()" class="bg-blue-600 text-white px-6 rounded-xl font-black text-xs uppercase">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Comparison Modal -->
     <div id="compareModal" class="fixed inset-0 z-[120] hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
         <div class="bg-white dark:bg-slate-900 w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]">
@@ -568,6 +596,41 @@
             }
         }
 
+        let REQUESTS = [
+            { text: "Looking for HP Elitebook 840 G5 under 40k", time: "2h ago" },
+            { text: "Urgent: iPhone 13 Pro Max screen replacement needed", time: "5h ago" }
+        ];
+
+        function renderRequests() {
+            const container = document.getElementById('requestBoard');
+            if(REQUESTS.length === 0) {
+                container.innerHTML = `<div class="text-center py-10"><i class="fa-solid fa-face-smile text-slate-200 text-4xl mb-3 block"></i><p class="text-slate-400 text-xs font-bold uppercase">No active requests. Be the first!</p></div>`;
+                return;
+            }
+            container.innerHTML = REQUESTS.map(r => `
+                <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl mb-3 border border-slate-100 dark:border-slate-700">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[9px] font-black uppercase text-blue-600 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded">Wanted</span>
+                        <span class="text-[9px] font-bold text-slate-400">${r.time}</span>
+                    </div>
+                    <p class="text-sm font-bold text-slate-700 dark:text-slate-200">${r.text}</p>
+                    <div class="mt-3 flex gap-2">
+                        <button onclick="alert('Replying to request...')" class="text-[10px] font-black uppercase text-slate-500 bg-white dark:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-600">Reply with Offer</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function postRequest() {
+            const input = document.getElementById('reqInput');
+            if(!input.value.trim()) return;
+            REQUESTS.unshift({ text: input.value, time: "Just now" });
+            input.value = '';
+            renderRequests();
+        }
+
+        renderRequests();
+
         function toggleDark() {
             document.documentElement.classList.toggle('dark');
         }
@@ -738,18 +801,28 @@
                     </button>
                 </div>
 
-                <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-end">
-                    <div>
-                        <p class="text-[10px] uppercase font-black text-slate-400">Seller Information</p>
-                        <p class="text-xs font-bold text-slate-600 dark:text-slate-300 mt-1">
-                            <i class="fa-solid fa-shop mr-1"></i> ${a.seller || 'Verified Seller'}
-                            ${a.seller === 'Nexcom Ventures' ? '<i class="fa-solid fa-circle-check text-blue-500 ml-1"></i>' : ''}
-                        </p>
-                        <p class="text-[10px] text-slate-500 mt-1"><i class="fa-solid fa-location-dot mr-1"></i> ${a.loc || 'Nairobi'}</p>
+                <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                    <div class="p-3 bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800 rounded-xl flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-shield-halved text-green-600"></i>
+                        <div>
+                            <p class="text-[9px] font-black uppercase text-green-700 dark:text-green-400">Safe Meeting Point</p>
+                            <p class="text-[8px] text-green-600 dark:text-green-500 font-bold uppercase tracking-tight">Visit Nexcom (Mama Ngina St) to inspect safely</p>
+                        </div>
                     </div>
-                    <button onclick="shareAd()" class="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-400">
-                        <i class="fa-solid fa-share-nodes"></i>
-                    </button>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-[10px] uppercase font-black text-slate-400">Seller Information</p>
+                            <p class="text-xs font-bold text-slate-600 dark:text-slate-300 mt-1">
+                                <i class="fa-solid fa-shop mr-1"></i> ${a.seller || 'Verified Seller'}
+                                ${a.seller === 'Nexcom Ventures' ? '<i class="fa-solid fa-circle-check text-blue-500 ml-1"></i>' : ''}
+                                ${a.seller !== 'Nexcom Ventures' ? '<span class="text-[8px] bg-slate-100 dark:bg-slate-700 px-1 rounded ml-1 text-slate-500">Member since 2024</span>' : ''}
+                            </p>
+                            <p class="text-[10px] text-slate-500 mt-1"><i class="fa-solid fa-location-dot mr-1"></i> ${a.loc || 'Nairobi'}</p>
+                        </div>
+                        <button onclick="shareAd()" class="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-400">
+                            <i class="fa-solid fa-share-nodes"></i>
+                        </button>
+                    </div>
                 </div>
             `;
             

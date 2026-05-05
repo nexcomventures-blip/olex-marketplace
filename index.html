@@ -181,7 +181,10 @@
     <!-- Modal (Native & Fast) -->
     <div id="modal" class="fixed inset-0 z-[100] hidden flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-sm">
         <div class="modal-bg w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl relative animate-in slide-in-from-bottom duration-300">
-            <button onclick="closeM()" class="absolute top-4 right-4 w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600"><i class="fa fa-times"></i></button>
+            <div class="absolute top-4 right-4 flex gap-2 z-20">
+                <button id="detailCompareBtn" class="w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-slate-600 shadow-sm"><i class="fa-solid fa-scale-balanced text-xs"></i></button>
+                <button onclick="closeM()" class="w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-slate-600 shadow-sm"><i class="fa fa-times"></i></button>
+            </div>
             <div class="p-4 sm:p-6">
                 <div class="relative w-full aspect-square bg-slate-50 rounded-2xl mb-4 overflow-hidden">
                     <div id="carousel" class="flex transition-transform duration-300 h-full"></div>
@@ -348,6 +351,37 @@
         </div>
     </div>
 
+    <!-- Compare Bar -->
+    <div id="compareBar" class="fixed bottom-0 left-0 right-0 z-[100] hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-2xl animate-in slide-in-from-bottom duration-300">
+        <div class="content-width p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 overflow-x-auto no-scrollbar py-1" id="compareList">
+                <!-- Selected items will show here -->
+            </div>
+            <div class="flex items-center gap-4 ml-4">
+                <button onclick="clearCompare()" class="text-[10px] font-black text-slate-400 uppercase tracking-widest whitespace-nowrap">Clear</button>
+                <button onclick="showCompareTable()" class="bg-blue-600 text-white px-5 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-blue-500/30 whitespace-nowrap">Compare</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Modal -->
+    <div id="compareModal" class="fixed inset-0 z-[120] hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]">
+            <div class="p-6 border-b flex items-center justify-between bg-slate-50 dark:bg-slate-800">
+                <div>
+                    <h3 class="font-black text-xl">⚖️ Item Comparison</h3>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Decision Engine</p>
+                </div>
+                <button onclick="closeCompareTable()" class="w-10 h-10 bg-white dark:bg-slate-700 rounded-full flex items-center justify-center shadow-md"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="p-6 overflow-x-auto">
+                <table class="w-full text-left border-collapse" id="compareTable">
+                    <!-- Table content generated via JS -->
+                </table>
+            </div>
+        </div>
+    </div>
+
     <script>
         const CATEGORIES = [
             { id: 'all', name: 'All', icon: 'fa-grid' },
@@ -368,6 +402,97 @@
         ];
 
         let cur = 'all';
+        let compareItems = [];
+
+        function toggleCompare(id, e) {
+            if(e) e.stopPropagation();
+            const idx = compareItems.indexOf(id);
+            if(idx > -1) {
+                compareItems.splice(idx, 1);
+            } else {
+                if(compareItems.length >= 3) return alert("You can compare up to 3 items at a time.");
+                compareItems.push(id);
+            }
+            updateCompareBar();
+            filter(cur);
+        }
+
+        function updateCompareBar() {
+            const bar = document.getElementById('compareBar');
+            const list = document.getElementById('compareList');
+            
+            if(compareItems.length === 0) {
+                bar.classList.add('hidden');
+                return;
+            }
+            
+            bar.classList.remove('hidden');
+            list.innerHTML = compareItems.map(id => {
+                const a = ADS.find(ad => ad.id === id);
+                return `
+                    <div class="relative w-10 h-10 flex-shrink-0">
+                        <img src="${a.img}" class="w-full h-full object-cover rounded-lg shadow border border-white">
+                        <button onclick="toggleCompare(${id}, event)" class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center text-[8px]"><i class="fa fa-times"></i></button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function clearCompare() {
+            compareItems = [];
+            updateCompareBar();
+            filter(cur);
+        }
+
+        function showCompareTable() {
+            const modal = document.getElementById('compareModal');
+            const table = document.getElementById('compareTable');
+            const items = compareItems.map(id => ADS.find(a => a.id === id));
+            
+            let html = `
+                <thead>
+                    <tr>
+                        <th class="p-4 bg-slate-50 dark:bg-slate-800 font-black text-[10px] uppercase text-slate-400 border-b border-slate-100 dark:border-slate-700">Feature</th>
+                        ${items.map(item => `
+                            <th class="p-4 bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700">
+                                <img src="${item.img}" class="w-20 h-20 object-cover rounded-xl mb-2 shadow-md">
+                                <p class="font-bold text-xs">${item.name}</p>
+                                <p class="text-blue-600 font-black text-xs mt-1">${item.price}</p>
+                            </th>
+                        `).join('')}
+                    </tr>
+                </thead>
+                <tbody class="text-xs">
+                    <tr>
+                        <td class="p-4 font-bold border-b border-slate-50 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30">Specs</td>
+                        ${items.map(item => `<td class="p-4 border-b border-slate-50 dark:border-slate-800 text-slate-500 dark:text-slate-400 font-medium">${item.specs}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td class="p-4 font-bold border-b border-slate-50 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30">Condition</td>
+                        ${items.map(item => `<td class="p-4 border-b border-slate-50 dark:border-slate-800 font-black text-blue-600 uppercase text-[10px] tracking-widest">${item.badge}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td class="p-4 font-bold border-b border-slate-50 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30">Location</td>
+                        ${items.map(item => `<td class="p-4 border-b border-slate-50 dark:border-slate-800 text-slate-500 dark:text-slate-400">${item.loc}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td class="p-4 font-bold bg-slate-50/50 dark:bg-slate-800/30">Action</td>
+                        ${items.map(item => `
+                            <td class="p-4">
+                                <button onclick="closeCompareTable(); openP(${item.id})" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-black uppercase text-[8px] tracking-widest">View Deal</button>
+                            </td>
+                        `).join('')}
+                    </tr>
+                </tbody>
+            `;
+            
+            table.innerHTML = html;
+            modal.classList.remove('hidden');
+        }
+
+        function closeCompareTable() {
+            document.getElementById('compareModal').classList.add('hidden');
+        }
 
         function toggleDark() {
             document.documentElement.classList.toggle('dark');
@@ -457,7 +582,12 @@
             });
             
             document.getElementById('grid').innerHTML = sortedAds.map(a => `
-                <div class="ad-card ${a.isBoosted ? 'boost-' + a.boostLevel : ''}" onclick="openP(${a.id})">
+                <div class="ad-card ${a.isBoosted ? 'boost-' + a.boostLevel : ''} relative" onclick="openP(${a.id})">
+                    <div class="absolute top-2 right-2 z-10">
+                        <button onclick="toggleCompare(${a.id}, event)" id="cmp-${a.id}" class="w-8 h-8 rounded-full bg-white/90 backdrop-blur shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 transition ${compareItems.includes(a.id) ? 'text-blue-600 bg-blue-50' : ''}">
+                            <i class="fa-solid fa-scale-balanced text-xs"></i>
+                        </button>
+                    </div>
                     <div class="relative overflow-hidden aspect-square">
                         <img src="${a.img}" class="ad-img" loading="lazy">
                         ${a.oldPrice ? `<div class="absolute top-2 left-2 bg-red-500 text-white text-[8px] font-black uppercase px-2 py-1 rounded-full shadow-lg">- ${Math.round(((parseInt(a.oldPrice.replace(/\D/g,'')) - parseInt(a.price.replace(/\D/g,''))) / parseInt(a.oldPrice.replace(/\D/g,''))) * 100)}%</div>` : ''}
@@ -513,6 +643,15 @@
             document.getElementById('m-specs').innerText = a.specs;
             document.getElementById('m-badge').innerText = a.badge;
             
+            // Update Detail Compare Btn
+            const detCmp = document.getElementById('detailCompareBtn');
+            detCmp.onclick = (e) => { toggleCompare(a.id, e); openP(a.id); };
+            if(compareItems.includes(a.id)) {
+                detCmp.classList.add('text-blue-600', 'bg-blue-50');
+            } else {
+                detCmp.classList.remove('text-blue-600', 'bg-blue-50');
+            }
+
             // Show Seller Info
             document.getElementById('m-specs').innerHTML += `
                 <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-end">

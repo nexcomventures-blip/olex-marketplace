@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OLEX | Smart Marketplace</title>
+    <title>Soko Mpya | The New Market Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -13,6 +13,7 @@
             --surface: #0f1014;
             --border: rgba(255, 255, 255, 0.05);
             --indigo: #6366f1;
+            --mpya: #10b981; /* Fresh emerald green for "Mpya" */
             --text-main: #ffffff;
             --text-dim: #94a3b8;
         }
@@ -130,7 +131,7 @@
     <!-- Top Nav -->
     <nav class="fixed top-0 w-full z-50 bg-[#050507]/90 backdrop-blur-md border-b border-white/5">
         <div class="max-w-[1400px] mx-auto px-4 h-20 flex items-center justify-between">
-            <a href="#" class="text-2xl font-black italic tracking-tighter">OL<span class="text-[#6366f1]">EX</span></a>
+            <a href="#" class="text-2xl font-black italic tracking-tighter">SOKO <span class="text-[#10b981]">MPYA</span></a>
             
             <div class="search-bar max-w-md hidden lg:flex flex-1 mx-8">
                 <i class="fa fa-search text-slate-500"></i>
@@ -138,7 +139,7 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <button onclick="openPostItem()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-xl text-xs font-bold uppercase transition">
+                <button onclick="openPostItem()" class="bg-[#10b981] hover:bg-indigo-500 text-white px-5 py-2 rounded-xl text-xs font-bold uppercase transition">
                     <i class="fa fa-plus-circle mr-2"></i>Post Ad
                 </button>
             </div>
@@ -190,11 +191,11 @@
             
             <div class="md:w-1/2 p-8 overflow-y-auto">
                 <div class="flex items-center gap-2 mb-2">
-                    <span id="m-badge" class="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] font-bold rounded uppercase"></span>
+                    <span id="m-badge" class="px-2 py-0.5 bg-indigo-500/20 text-[#10b981] text-[10px] font-bold rounded uppercase"></span>
                     <span id="m-cat" class="text-[10px] text-slate-500 uppercase font-black"></span>
                 </div>
                 <h2 id="m-name" class="text-2xl font-black mb-1"></h2>
-                <p id="m-price" class="text-xl font-black text-indigo-400 mb-6"></p>
+                <p id="m-price" class="text-xl font-black text-[#10b981] mb-6"></p>
                 <div class="bg-white/5 rounded-2xl p-4 border border-white/5 mb-6">
                     <p id="m-specs" class="text-sm text-slate-400 leading-relaxed"></p>
                 </div>
@@ -289,7 +290,7 @@
                         </div>
                         <div class="p-3">
                             <h4 class="text-[11px] font-bold truncate">${a.name}</h4>
-                            <p class="text-xs font-black text-indigo-400 mt-1">${a.price}</p>
+                            <p class="text-xs font-black text-[#10b981] mt-1">${a.price}</p>
                             <p class="text-[9px] text-slate-500 mt-2"><i class="fa fa-location-dot mr-1"></i> Nairobi</p>
                         </div>
                     </div>

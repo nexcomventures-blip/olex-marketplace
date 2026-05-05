@@ -19,6 +19,7 @@
             --text: #0f172a;
             --border: #e2e8f0;
             --card: #ffffff;
+            --muted: #64748b;
         }
 
         .dark {
@@ -27,6 +28,7 @@
             --text: #f8fafc;
             --border: #334155;
             --card: #1e293b;
+            --muted: #94a3b8;
         }
 
         body {
@@ -38,15 +40,28 @@
             transition: 0.3s;
         }
 
-        .ad-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 8px;
-            transition: 0.2s;
-            cursor: pointer;
+        /* Content Layout */
+        .content-width { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+        /* Logo Design */
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-box {
+            width: 36px;
+            height: 36px;
+            background: var(--brand);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 20px;
         }
-        
+        .logo-text { line-height: 1; }
+        .logo-top { display: block; font-weight: 800; font-size: 18px; color: var(--text); letter-spacing: -0.5px; }
+        .logo-bottom { display: block; font-weight: 700; font-size: 9px; color: var(--brand); letter-spacing: 2px; text-transform: uppercase; }
+
+        /* Navigation */
         .nav-sticky { 
             position: sticky; 
             top: 0; 
@@ -55,19 +70,43 @@
             border-bottom: 1px solid var(--border); 
         }
 
+        /* Modern Category Scroller */
+        .cat-scroll { display: flex; gap: 8px; overflow-x: auto; padding: 12px 0; scrollbar-width: none; }
+        .cat-scroll::-webkit-scrollbar { display: none; }
         .cat-btn {
             background: var(--surface);
             border: 1px solid var(--border);
-            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 99px;
+            white-space: nowrap;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            transition: 0.2s;
         }
+        .cat-btn.active { background: var(--brand); border-color: var(--brand); color: white; }
+
+        /* Performance Grid */
+        .ad-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        @media (min-width: 768px) { .ad-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+
+        .ad-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 8px;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .ad-price { font-weight: 800; font-size: 15px; color: var(--brand); }
+        .ad-name { font-size: 13px; font-weight: 600; color: var(--text); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+
+        .ad-img { aspect-ratio: 1; width: 100%; border-radius: 10px; margin-bottom: 8px; object-fit: cover; background: var(--surface); }
         
-        /* Performance Boost */
-        .ad-img { aspect-ratio: 1; width: 100%; border-radius: 10px; margin-bottom: 8px; object-fit: cover; }
-        .ad-card.boosted {
-            border: 2px solid var(--brand);
-            background: #eff6ff;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
-        }
+        .ad-card.boost-gold { border: 2px solid #fbbf24; background: var(--surface); box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2); }
+        .ad-card.boost-silver { border: 2px solid #1e293b; background: var(--surface); box-shadow: 0 4px 15px rgba(30, 41, 59, 0.1); }
+        .ad-card.boost-bronze { border: 2px solid #b45309; background: var(--surface); }
+
         .boost-badge {
             padding: 2px 8px;
             border-radius: 6px;
@@ -83,24 +122,6 @@
         .boost-badge.silver { background: #1e293b; color: #fff; }
         .boost-badge.bronze { background: #b45309; color: #fff; }
 
-        .ad-card.boost-gold { border: 2px solid #fbbf24; background: var(--surface); box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2); }
-        .ad-card.boost-silver { border: 2px solid #1e293b; background: var(--surface); box-shadow: 0 4px 15px rgba(30, 41, 59, 0.1); }
-        .ad-card.boost-bronze { border: 2px solid #b45309; background: var(--surface); }
-
-        /* Upgrade Selection */
-        .upgrade-card {
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .upgrade-card.selected {
-            border-color: var(--brand);
-            background: #eff6ff;
-        }
-        .ad-name { font-size: 13px; font-weight: 600; color: var(--text); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
-
         /* Search */
         .search-wrap { position: relative; margin: 12px 0; }
         .search-input {
@@ -111,8 +132,12 @@
             border-radius: 12px;
             font-size: 14px;
             outline: none;
+            color: var(--text);
         }
-        .search-input:focus { border-color: var(--brand); background: white; }
+        .search-input:focus { border-color: var(--brand); background: var(--bg); }
+
+        /* Modal Theme */
+        .modal-bg { background: var(--card); color: var(--text); }
     </style>
 </head>
 <body>
@@ -141,9 +166,9 @@
 
         <div class="cat-scroll" id="cats"></div>
 
-        <div class="flex items-center justify-between py-4">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500" id="title">New Listings</h2>
-            <span class="text-[10px] font-bold text-slate-400" id="stats"></span>
+        <div class="flex items-center justify-between py-6">
+            <h2 class="text-lg font-black text-slate-800 dark:text-slate-100 tracking-tight" id="title">Featured Market</h2>
+            <span class="text-[10px] font-black uppercase text-blue-600 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded" id="stats"></span>
         </div>
 
         <div class="ad-grid fast-load" id="grid"></div>
@@ -152,18 +177,18 @@
 
     <!-- Modal (Native & Fast) -->
     <div id="modal" class="fixed inset-0 z-[100] hidden flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-sm">
-        <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl relative animate-in slide-in-from-bottom duration-300">
+        <div class="modal-bg w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl relative animate-in slide-in-from-bottom duration-300">
             <button onclick="closeM()" class="absolute top-4 right-4 w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600"><i class="fa fa-times"></i></button>
             <div class="p-4 sm:p-6">
                 <img id="m-img" class="w-full aspect-square object-cover bg-slate-50 rounded-2xl mb-4">
                 <span id="m-badge" class="text-[10px] font-black uppercase text-blue-600 mb-2 block"></span>
                 <h3 id="m-name" class="text-xl font-bold mb-1"></h3>
                 <p id="m-price" class="text-2xl font-black text-blue-600 mb-4"></p>
-                <div class="bg-slate-50 p-4 rounded-xl text-xs text-slate-500 mb-4 leading-relaxed" id="m-specs"></div>
-                <div class="flex items-center gap-2 mb-6 p-3 bg-blue-50 rounded-xl border border-blue-100">
-                    <i class="fa fa-shield-check text-blue-600 text-sm"></i>
-                    <p class="text-[9px] font-bold text-blue-700 uppercase tracking-wider">Protected by Soko Mpya Escrow</p>
-                </div>
+                    <div class="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl text-xs text-slate-500 mb-4 leading-relaxed" id="m-specs"></div>
+                    <div class="flex items-center gap-2 mb-6 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-xl border border-blue-100 dark:border-blue-800">
+                        <i class="fa fa-shield-check text-blue-600"></i>
+                        <p class="text-[9px] font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">Protected by Soko Mpya Escrow</p>
+                    </div>
                 <div class="grid grid-cols-2 gap-3">
                     <button onclick="call()" class="bg-blue-600 text-white py-4 rounded-xl font-bold uppercase text-xs">Call</button>
                     <button onclick="wpp()" class="bg-[#25D366] text-white py-4 rounded-xl font-bold uppercase text-xs">WhatsApp</button>
@@ -174,7 +199,7 @@
 
     <!-- Upload Modal (Easy & Direct) -->
     <div id="postModal" class="fixed inset-0 z-[110] hidden flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-sm">
-        <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl relative max-h-[95vh] flex flex-col">
+        <div class="modal-bg w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl relative max-h-[95vh] flex flex-col">
             <div class="p-4 border-b flex items-center justify-between">
                 <h3 class="font-black text-lg">Post New Ad</h3>
                 <button onclick="closePost()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600"><i class="fa fa-times"></i></button>

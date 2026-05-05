@@ -83,8 +83,6 @@
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
         }
         .boost-badge {
-            background: var(--brand);
-            color: white;
             padding: 2px 8px;
             border-radius: 6px;
             font-size: 8px;
@@ -95,6 +93,13 @@
             align-items: center;
             gap: 4px;
         }
+        .boost-badge.gold { background: #fbbf24; color: #000; }
+        .boost-badge.silver { background: #94a3b8; color: #fff; }
+        .boost-badge.bronze { background: #b45309; color: #fff; }
+
+        .ad-card.boost-gold { border: 2px solid #fbbf24; background: #fffbeb; box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2); }
+        .ad-card.boost-silver { border: 2px solid #94a3b8; background: #f8fafc; }
+        .ad-card.boost-bronze { border: 2px solid #b45309; background: #fff7ed; }
 
         /* Upgrade Selection */
         .upgrade-card {
@@ -241,32 +246,44 @@
     <div id="upgradeModal" class="fixed inset-0 z-[120] hidden flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-sm">
         <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl relative p-6 animate-in slide-in-from-bottom duration-300">
             <h3 class="font-black text-xl mb-2">🚀 Boost Your Ad</h3>
-            <p class="text-slate-500 text-sm mb-6">Get up to 10x more views by promoting your item.</p>
+            <p class="text-slate-500 text-sm mb-6">Choose a plan to get up to 20x more buyers.</p>
             
             <div class="space-y-3 mb-8">
-                <div class="upgrade-card selected" id="up-basic" onclick="selectUpgrade('up-basic')">
+                <div class="upgrade-card" id="up-bronze" onclick="selectUpgrade('up-bronze', 'bronze')">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="font-bold text-sm">7-Day Boost</p>
-                            <p class="text-[10px] text-slate-400">Stay at the top of search for a week.</p>
+                            <p class="font-bold text-sm">Bronze Boost (3 Days)</p>
+                            <p class="text-[10px] text-slate-400 text-left">Basic top position for quick sales.</p>
                         </div>
-                        <span class="font-black text-blue-600 text-sm">KSh 499</span>
+                        <span class="font-black text-blue-600 text-sm">KSh 199</span>
                     </div>
                 </div>
-                <div class="upgrade-card" id="up-premium" onclick="selectUpgrade('up-premium')">
+                <div class="upgrade-card selected" id="up-silver" onclick="selectUpgrade('up-silver', 'silver')">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="font-bold text-sm">Premium Highlight</p>
-                            <p class="text-[10px] text-slate-400">Colored border + Top position for 30 days.</p>
+                            <p class="font-bold text-sm">Silver Standard (14 Days)</p>
+                            <p class="text-[10px] text-slate-400 text-left">2 weeks of top-tier visibility.</p>
                         </div>
-                        <span class="font-black text-blue-600 text-sm">KSh 1,499</span>
+                        <span class="font-black text-blue-600 text-sm">KSh 749</span>
+                    </div>
+                </div>
+                <div class="upgrade-card" id="up-gold" onclick="selectUpgrade('up-gold', 'gold')">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <p class="font-bold text-sm">Gold Diamond (30 Days)</p>
+                                <span class="bg-amber-100 text-amber-700 text-[8px] font-black px-1.5 rounded">MOST POPULAR</span>
+                            </div>
+                            <p class="text-[10px] text-slate-400 text-left">Omnipresent position + Social Media push.</p>
+                        </div>
+                        <span class="font-black text-blue-600 text-sm">KSh 2,499</span>
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <button onclick="skipUpgrade()" class="text-slate-400 font-bold text-xs uppercase">Maybe Later</button>
-                <button onclick="payUpgrade()" class="bg-blue-600 text-white py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-lg shadow-blue-500/20">Pay & Promote</button>
+                <button onclick="payUpgrade()" class="bg-blue-600 text-white py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-lg shadow-blue-500/20">Confirm & Pay</button>
             </div>
         </div>
     </div>
@@ -282,12 +299,12 @@
         ];
 
         const ADS = [
-            { id: 1, cat: 'laptops', name: 'HP EliteBook 840 G8', price: 'KSh 85,000', img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=50', specs: 'Intel Core i7 11th Gen • 16GB RAM • 512GB SSD • Ex-UK Grade A', badge: 'Verified', isBoosted: false },
-            { id: 2, cat: 'phones', name: 'iPhone 15 Pro Max', price: 'KSh 185,000', img: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=400&q=50', specs: '256GB • Natural Titanium • Mint Condition • Battery 100%', badge: 'Premium', isBoosted: true },
-            { id: 3, cat: 'motors', name: 'Toyota Harrier 2018', price: 'KSh 3,850,000', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=400&q=50', specs: 'Zero Mileage • Panoramic Sunroof • Leather Interior', badge: 'New', isBoosted: false },
-            { id: 4, cat: 'fashion', name: 'Luxury Chronograph', price: 'KSh 12,500', img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=50', specs: 'Automatic • Sapphire Glass • Water Resistant', badge: 'Luxury', isBoosted: false },
-            { id: 5, cat: 'land', name: '50x100 Kamulu', price: 'KSh 950,000', img: 'https://images.unsplash.com/photo-1500382017468-9049fee74a62?auto=format&fit=crop&w=400&q=50', specs: 'Prime location near tarmac • Ready Title Deed', badge: 'Urgent', isBoosted: false },
-            { id: 6, cat: 'laptops', name: 'MacBook Pro M2 14"', price: 'KSh 245,000', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50', specs: 'M2 Chip • 16GB RAM • 512GB SSD • Brand New', badge: 'New', isBoosted: true }
+            { id: 1, cat: 'laptops', name: 'HP EliteBook 840 G8', price: 'KSh 85,000', img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=50', specs: 'Intel Core i7 11th Gen • 16GB RAM • 512GB SSD • Ex-UK Grade A', badge: 'Verified', isBoosted: false, boostLevel: 'none' },
+            { id: 2, cat: 'phones', name: 'iPhone 15 Pro Max', price: 'KSh 185,000', img: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=400&q=50', specs: '256GB • Natural Titanium • Mint Condition • Battery 100%', badge: 'Premium', isBoosted: true, boostLevel: 'gold' },
+            { id: 3, cat: 'motors', name: 'Toyota Harrier 2018', price: 'KSh 3,850,000', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=400&q=50', specs: 'Zero Mileage • Panoramic Sunroof • Leather Interior', badge: 'New', isBoosted: false, boostLevel: 'none' },
+            { id: 4, cat: 'fashion', name: 'Luxury Chronograph', price: 'KSh 12,500', img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=50', specs: 'Automatic • Sapphire Glass • Water Resistant', badge: 'Luxury', isBoosted: false, boostLevel: 'none' },
+            { id: 5, cat: 'land', name: '50x100 Kamulu', price: 'KSh 950,000', img: 'https://images.unsplash.com/photo-1500382017468-9049fee74a62?auto=format&fit=crop&w=400&q=50', specs: 'Prime location near tarmac • Ready Title Deed', badge: 'Urgent', isBoosted: false, boostLevel: 'none' },
+            { id: 6, cat: 'laptops', name: 'MacBook Pro M2 14"', price: 'KSh 245,000', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50', specs: 'M2 Chip • 16GB RAM • 512GB SSD • Brand New', badge: 'New', isBoosted: true, boostLevel: 'silver' }
         ];
 
         let cur = 'all';
@@ -313,15 +330,20 @@
         }
 
         function render(ads) {
-            // Sort: Boosted ads first
-            const sortedAds = [...ads].sort((a, b) => (b.isBoosted ? 1 : 0) - (a.isBoosted ? 1 : 0));
+            // Sort: Boosted ads first (Gold > Silver > Bronze > None)
+            const boostOrder = { 'gold': 3, 'silver': 2, 'bronze': 1, 'none': 0 };
+            const sortedAds = [...ads].sort((a, b) => {
+                const aLevel = a.isBoosted ? a.boostLevel : 'none';
+                const bLevel = b.isBoosted ? b.boostLevel : 'none';
+                return boostOrder[bLevel] - boostOrder[aLevel];
+            });
             
             document.getElementById('grid').innerHTML = sortedAds.map(a => `
-                <div class="ad-card ${a.isBoosted ? 'boosted' : ''}" onclick="openP(${a.id})">
+                <div class="ad-card ${a.isBoosted ? 'boost-' + a.boostLevel : ''}" onclick="openP(${a.id})">
                     <img src="${a.img}" class="ad-img" loading="lazy">
                     <div class="px-1">
                         <div class="flex items-center gap-2 mb-1">
-                            ${a.isBoosted ? '<span class="boost-badge"><i class="fa fa-rocket"></i> Boosted</span>' : ''}
+                            ${a.isBoosted ? `<span class="boost-badge ${a.boostLevel}"><i class="fa fa-rocket"></i> ${a.boostLevel}</span>` : ''}
                         </div>
                         <p class="ad-price">${a.price}</p>
                         <p class="ad-name">${a.name}</p>
@@ -355,6 +377,7 @@
         /* Upload Logic */
         let selectedCond = 'New';
         let lastCreatedAdId = null;
+        let selectedBoost = 'silver';
 
         function postAd() {
             document.getElementById('postModal').classList.remove('hidden');
@@ -386,7 +409,8 @@
                 img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50', // Default placeholder
                 specs: document.getElementById('postSpecs').value,
                 badge: selectedCond,
-                isBoosted: false
+                isBoosted: false,
+                boostLevel: 'none'
             };
             
             lastCreatedAdId = newAd.id;
@@ -401,9 +425,10 @@
         }
 
         /* Upgrade Logic */
-        function selectUpgrade(id) {
+        function selectUpgrade(id, level) {
             document.querySelectorAll('.upgrade-card').forEach(c => c.classList.remove('selected'));
             document.getElementById(id).classList.add('selected');
+            selectedBoost = level;
         }
 
         function skipUpgrade() {
@@ -415,12 +440,15 @@
         function payUpgrade() {
             // Find the ad and boost it
             const ad = ADS.find(a => a.id === lastCreatedAdId);
-            if(ad) ad.isBoosted = true;
+            if(ad) {
+                ad.isBoosted = true;
+                ad.boostLevel = selectedBoost;
+            }
             
             document.getElementById('upgradeModal').classList.add('hidden');
             document.body.style.overflow = 'auto';
             filter('all');
-            alert("🚀 Boost Active! Your ad is now at the top of the feed.");
+            alert(`🚀 ${selectedBoost.toUpperCase()} Boost Active! Your ad is now prioritized.`);
         }
         function call() { alert("Dialing Merchant..."); }
         function wpp() { alert("Opening WhatsApp..."); }

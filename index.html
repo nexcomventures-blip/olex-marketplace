@@ -6,13 +6,27 @@
     <title>Soko Mpya | Fast, Secure Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <style>
         :root {
-            --brand: #2563eb; /* Vibrant Cyber Blue */
+            --brand: #2563eb;
             --bg: #ffffff;
             --surface: #f8fafc;
             --text: #0f172a;
             --border: #e2e8f0;
+            --card: #ffffff;
+        }
+
+        .dark {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #f8fafc;
+            --border: #334155;
+            --card: #1e293b;
         }
 
         body {
@@ -21,64 +35,34 @@
             color: var(--text);
             margin: 0;
             line-height: 1.5;
+            transition: 0.3s;
         }
-
-        /* Speed Optimizations */
-        .fast-load { content-visibility: auto; }
-        img { border-radius: 12px; object-fit: cover; background: #f1f5f9; }
-        .ad-img { aspect-ratio: 1; width: 100%; border-radius: 10px; margin-bottom: 8px; }
-        .ad-price { font-weight: 800; font-size: 15px; color: var(--brand); }
-
-        /* Logo Design */
-        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo-box {
-            width: 36px;
-            height: 36px;
-            background: var(--brand);
-            color: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 20px;
-        }
-        .logo-text { line-height: 1; }
-        .logo-top { display: block; font-weight: 800; font-size: 18px; color: var(--text); letter-spacing: -0.5px; }
-        .logo-bottom { display: block; font-weight: 700; font-size: 9px; color: var(--brand); letter-spacing: 2px; text-transform: uppercase; }
-
-        /* Layout */
-        .nav-sticky { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.8); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-        .content-width { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
-
-        /* Modern Category Scroller */
-        .cat-scroll { display: flex; gap: 8px; overflow-x: auto; padding: 12px 0; scrollbar-width: none; }
-        .cat-scroll::-webkit-scrollbar { display: none; }
-        .cat-btn {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 99px;
-            white-space: nowrap;
-            font-size: 13px;
-            font-weight: 600;
-            color: #64748b;
-            transition: 0.2s;
-        }
-        .cat-btn.active { background: var(--brand); border-color: var(--brand); color: white; }
-
-        /* Performance Grid */
-        .ad-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        @media (min-width: 768px) { .ad-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 
         .ad-card {
-            background: white;
+            background: var(--card);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 8px;
             transition: 0.2s;
             cursor: pointer;
         }
+        
+        .nav-sticky { 
+            position: sticky; 
+            top: 0; 
+            z-index: 50; 
+            background: var(--bg);
+            border-bottom: 1px solid var(--border); 
+        }
+
+        .cat-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        
+        /* Performance Boost */
+        .ad-img { aspect-ratio: 1; width: 100%; border-radius: 10px; margin-bottom: 8px; object-fit: cover; }
         .ad-card.boosted {
             border: 2px solid var(--brand);
             background: #eff6ff;
@@ -99,9 +83,9 @@
         .boost-badge.silver { background: #1e293b; color: #fff; }
         .boost-badge.bronze { background: #b45309; color: #fff; }
 
-        .ad-card.boost-gold { border: 2px solid #fbbf24; background: #fffbeb; box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2); }
-        .ad-card.boost-silver { border: 2px solid #1e293b; background: #f1f5f9; box-shadow: 0 4px 15px rgba(30, 41, 59, 0.1); }
-        .ad-card.boost-bronze { border: 2px solid #b45309; background: #fff7ed; }
+        .ad-card.boost-gold { border: 2px solid #fbbf24; background: var(--surface); box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2); }
+        .ad-card.boost-silver { border: 2px solid #1e293b; background: var(--surface); box-shadow: 0 4px 15px rgba(30, 41, 59, 0.1); }
+        .ad-card.boost-bronze { border: 2px solid #b45309; background: var(--surface); }
 
         /* Upgrade Selection */
         .upgrade-card {
@@ -143,6 +127,9 @@
                 </div>
             </a>
             <button onclick="postAd()" class="bg-[#2563eb] text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wide">Post Ad</button>
+            <button onclick="toggleDark()" class="w-8 h-8 flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-full ml-2">
+                <i class="fa-solid fa-moon text-slate-600 dark:text-slate-300"></i>
+            </button>
         </div>
     </nav>
 
@@ -235,6 +222,14 @@
                 </div>
 
                 <div>
+                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Image URL (Optional)</label>
+                    <input type="text" id="postImg" onkeyup="previewImg(this.value)" placeholder="Paste image link here..." class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm outline-none focus:border-blue-500">
+                    <div id="imgPreview" class="hidden mt-2 border border-dashed border-slate-300 rounded-xl overflow-hidden aspect-video">
+                        <img id="previewEl" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <div>
                     <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Description & Specs</label>
                     <textarea id="postSpecs" rows="3" placeholder="Describe the RAM, Storage, Condition, etc." class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm outline-none focus:border-blue-500"></textarea>
                 </div>
@@ -301,15 +296,19 @@
         ];
 
         const ADS = [
-            { id: 1, cat: 'laptops', name: 'HP EliteBook 840 G8', price: 'KSh 85,000', img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=50', specs: 'Intel Core i7 11th Gen • 16GB RAM • 512GB SSD • Ex-UK Grade A', badge: 'Verified', isBoosted: false, boostLevel: 'none' },
-            { id: 2, cat: 'phones', name: 'iPhone 15 Pro Max', price: 'KSh 185,000', img: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=400&q=50', specs: '256GB • Natural Titanium • Mint Condition • Battery 100%', badge: 'Premium', isBoosted: true, boostLevel: 'gold' },
-            { id: 3, cat: 'motors', name: 'Toyota Harrier 2018', price: 'KSh 3,850,000', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=400&q=50', specs: 'Zero Mileage • Panoramic Sunroof • Leather Interior', badge: 'New', isBoosted: false, boostLevel: 'none' },
-            { id: 4, cat: 'fashion', name: 'Luxury Chronograph', price: 'KSh 12,500', img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=50', specs: 'Automatic • Sapphire Glass • Water Resistant', badge: 'Luxury', isBoosted: true, boostLevel: 'bronze' },
-            { id: 5, cat: 'land', name: '50x100 Kamulu', price: 'KSh 950,000', img: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=600&q=80', specs: 'Prime location near tarmac • Ready Title Deed', badge: 'Urgent', isBoosted: false, boostLevel: 'none' },
-            { id: 6, cat: 'laptops', name: 'MacBook Pro M2 14"', price: 'KSh 245,000', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50', specs: 'M2 Chip • 16GB RAM • 512GB SSD • Brand New', badge: 'New', isBoosted: true, boostLevel: 'silver' }
+            { id: 1, cat: 'laptops', name: 'HP EliteBook 840 G8', price: 'KSh 85,000', img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=50', specs: 'Intel Core i7 11th Gen • 16GB RAM • 512GB SSD', badge: 'Verified', isBoosted: false, boostLevel: 'none', seller: 'Nexcom Ventures', loc: 'Nairobi CBD' },
+            { id: 2, cat: 'phones', name: 'iPhone 15 Pro Max', price: 'KSh 185,000', img: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=400&q=50', specs: '256GB • Natural Titanium • Battery 100%', badge: 'Premium', isBoosted: true, boostLevel: 'gold', seller: 'Nexcom Ventures', loc: 'Mama Ngina St' },
+            { id: 3, cat: 'motors', name: 'Toyota Harrier 2018', price: 'KSh 3,850,000', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=400&q=50', specs: 'Zero Mileage • Sunroof • Leather', badge: 'New', isBoosted: false, boostLevel: 'none', seller: 'Car Mart', loc: 'Karen' },
+            { id: 4, cat: 'fashion', name: 'Luxury Chronograph', price: 'KSh 12,500', img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=50', specs: 'Automatic • Sapphire Glass', badge: 'Luxury', isBoosted: true, boostLevel: 'bronze', seller: 'Watch Hub', loc: 'CBD' },
+            { id: 5, cat: 'land', name: '50x100 Kamulu', price: 'KSh 950,000', img: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=600&q=80', specs: 'Prime location • Ready Title Deed', badge: 'Urgent', isBoosted: false, boostLevel: 'none', seller: 'Land Co', loc: 'Kamulu' },
+            { id: 6, cat: 'laptops', name: 'MacBook Pro M2 14"', price: 'KSh 245,000', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50', specs: 'M2 Chip • 16GB RAM • 512GB SSD', badge: 'New', isBoosted: true, boostLevel: 'silver', seller: 'Nexcom Ventures', loc: 'CBD' }
         ];
 
         let cur = 'all';
+
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+        }
 
         function init() {
             renderCats();
@@ -371,6 +370,16 @@
             document.getElementById('m-price').innerText = a.price;
             document.getElementById('m-specs').innerText = a.specs;
             document.getElementById('m-badge').innerText = a.badge;
+            
+            // Show Seller Info
+            document.getElementById('m-specs').innerHTML += `
+                <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                    <p class="text-[10px] uppercase font-black text-slate-400">Seller Information</p>
+                    <p class="text-xs font-bold text-slate-600 dark:text-slate-300 mt-1"><i class="fa-solid fa-shop mr-1"></i> ${a.seller || 'Verified Seller'}</p>
+                    <p class="text-[10px] text-slate-500 mt-1"><i class="fa-solid fa-location-dot mr-1"></i> ${a.loc || 'Nairobi'}</p>
+                </div>
+            `;
+            
             document.getElementById('modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
@@ -402,9 +411,21 @@
             el.classList.remove('border-slate-200', 'bg-slate-50', 'text-slate-500');
             selectedCond = val;
         }
+        function previewImg(url) {
+            const wrap = document.getElementById('imgPreview');
+            const el = document.getElementById('previewEl');
+            if(url.length > 10) {
+                el.src = url;
+                wrap.classList.remove('hidden');
+            } else {
+                wrap.classList.add('hidden');
+            }
+        }
+
         function publishAd() {
             const name = document.getElementById('postName').value;
             const price = document.getElementById('postPrice').value;
+            const imgUrl = document.getElementById('postImg').value;
             if(!name || !price) return alert("Please enter Name and Price");
             
             const newAd = {
@@ -412,11 +433,13 @@
                 cat: document.getElementById('postCat').value,
                 name: name,
                 price: 'KSh ' + Number(price).toLocaleString(),
-                img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50', // Default placeholder
+                img: imgUrl || 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50',
                 specs: document.getElementById('postSpecs').value,
                 badge: selectedCond,
                 isBoosted: false,
-                boostLevel: 'none'
+                boostLevel: 'none',
+                seller: 'Anonymous Seller',
+                loc: 'Kenya'
             };
             
             lastCreatedAdId = newAd.id;

@@ -77,9 +77,37 @@
             transition: 0.2s;
             cursor: pointer;
         }
-        .ad-card:hover { border-color: var(--brand); transform: translateY(-2px); }
-        .ad-img { aspect-ratio: 1; width: 100%; border-radius: 10px; margin-bottom: 8px; }
-        .ad-price { font-weight: 800; font-size: 15px; color: var(--brand); }
+        .ad-card.boosted {
+            border: 2px solid var(--brand);
+            background: #eff6ff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+        .boost-badge {
+            background: var(--brand);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Upgrade Selection */
+        .upgrade-card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .upgrade-card.selected {
+            border-color: var(--brand);
+            background: #eff6ff;
+        }
         .ad-name { font-size: 13px; font-weight: 600; color: var(--text); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
 
         /* Search */
@@ -205,6 +233,40 @@
         </div>
     </div>
 
+    <!-- Upgrade Ad Modal -->
+    <div id="upgradeModal" class="fixed inset-0 z-[120] hidden flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl relative p-6 animate-in slide-in-from-bottom duration-300">
+            <h3 class="font-black text-xl mb-2">🚀 Boost Your Ad</h3>
+            <p class="text-slate-500 text-sm mb-6">Get up to 10x more views by promoting your item.</p>
+            
+            <div class="space-y-3 mb-8">
+                <div class="upgrade-card selected" id="up-basic" onclick="selectUpgrade('up-basic')">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-bold text-sm">7-Day Boost</p>
+                            <p class="text-[10px] text-slate-400">Stay at the top of search for a week.</p>
+                        </div>
+                        <span class="font-black text-blue-600 text-sm">KSh 499</span>
+                    </div>
+                </div>
+                <div class="upgrade-card" id="up-premium" onclick="selectUpgrade('up-premium')">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-bold text-sm">Premium Highlight</p>
+                            <p class="text-[10px] text-slate-400">Colored border + Top position for 30 days.</p>
+                        </div>
+                        <span class="font-black text-blue-600 text-sm">KSh 1,499</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="skipUpgrade()" class="text-slate-400 font-bold text-xs uppercase">Maybe Later</button>
+                <button onclick="payUpgrade()" class="bg-blue-600 text-white py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-lg shadow-blue-500/20">Pay & Promote</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const CATEGORIES = [
             { id: 'all', name: 'All', icon: 'fa-grid' },
@@ -247,10 +309,16 @@
         }
 
         function render(ads) {
-            document.getElementById('grid').innerHTML = ads.map(a => `
-                <div class="ad-card" onclick="openP(${a.id})">
+            // Sort: Boosted ads first
+            const sortedAds = [...ads].sort((a, b) => (b.isBoosted ? 1 : 0) - (a.isBoosted ? 1 : 0));
+            
+            document.getElementById('grid').innerHTML = sortedAds.map(a => `
+                <div class="ad-card ${a.isBoosted ? 'boosted' : ''}" onclick="openP(${a.id})">
                     <img src="${a.img}" class="ad-img" loading="lazy">
                     <div class="px-1">
+                        <div class="flex items-center gap-2 mb-1">
+                            ${a.isBoosted ? '<span class="boost-badge"><i class="fa fa-rocket"></i> Boosted</span>' : ''}
+                        </div>
                         <p class="ad-price">${a.price}</p>
                         <p class="ad-name">${a.name}</p>
                         <p class="text-[9px] text-slate-400 mt-1 uppercase font-bold tracking-wider">Nairobi</p>
@@ -282,6 +350,8 @@
 
         /* Upload Logic */
         let selectedCond = 'New';
+        let lastCreatedAdId = null;
+
         function postAd() {
             document.getElementById('postModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -311,13 +381,42 @@
                 price: 'KSh ' + Number(price).toLocaleString(),
                 img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50', // Default placeholder
                 specs: document.getElementById('postSpecs').value,
-                badge: selectedCond
+                badge: selectedCond,
+                isBoosted: false
             };
             
+            lastCreatedAdId = newAd.id;
             ADS.unshift(newAd);
             filter('all');
             closePost();
-            alert("Success! Your item is now live on Soko Mpya.");
+            
+            // Show Upgrade Modal instead of simple alert
+            setTimeout(() => {
+                document.getElementById('upgradeModal').classList.remove('hidden');
+            }, 500);
+        }
+
+        /* Upgrade Logic */
+        function selectUpgrade(id) {
+            document.querySelectorAll('.upgrade-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById(id).classList.add('selected');
+        }
+
+        function skipUpgrade() {
+            document.getElementById('upgradeModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            alert("Your ad is live! Good luck with the sale.");
+        }
+
+        function payUpgrade() {
+            // Find the ad and boost it
+            const ad = ADS.find(a => a.id === lastCreatedAdId);
+            if(ad) ad.isBoosted = true;
+            
+            document.getElementById('upgradeModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            filter('all');
+            alert("🚀 Boost Active! Your ad is now at the top of the feed.");
         }
         function call() { alert("Dialing Merchant..."); }
         function wpp() { alert("Opening WhatsApp..."); }

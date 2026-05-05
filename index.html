@@ -321,12 +321,12 @@
         ];
 
         const ADS = [
-            { id: 1, cat: 'laptops', name: 'HP EliteBook 840 G8', price: 'KSh 85,000', img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=50', specs: 'Intel Core i7 11th Gen • 16GB RAM • 512GB SSD', badge: 'Verified', isBoosted: false, boostLevel: 'none', seller: 'Nexcom Ventures', loc: 'Nairobi CBD' },
-            { id: 2, cat: 'phones', name: 'iPhone 15 Pro Max', price: 'KSh 185,000', img: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=400&q=50', specs: '256GB • Natural Titanium • Battery 100%', badge: 'Premium', isBoosted: true, boostLevel: 'gold', seller: 'Nexcom Ventures', loc: 'Mama Ngina St' },
-            { id: 3, cat: 'motors', name: 'Toyota Harrier 2018', price: 'KSh 3,850,000', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=400&q=50', specs: 'Zero Mileage • Sunroof • Leather', badge: 'New', isBoosted: false, boostLevel: 'none', seller: 'Car Mart', loc: 'Karen' },
-            { id: 4, cat: 'fashion', name: 'Luxury Chronograph', price: 'KSh 12,500', img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=50', specs: 'Automatic • Sapphire Glass', badge: 'Luxury', isBoosted: true, boostLevel: 'bronze', seller: 'Watch Hub', loc: 'CBD' },
-            { id: 5, cat: 'land', name: '50x100 Kamulu', price: 'KSh 950,000', img: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=600&q=80', specs: 'Prime location • Ready Title Deed', badge: 'Urgent', isBoosted: false, boostLevel: 'none', seller: 'Land Co', loc: 'Kamulu' },
-            { id: 6, cat: 'laptops', name: 'MacBook Pro M2 14"', price: 'KSh 245,000', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50', specs: 'M2 Chip • 16GB RAM • 512GB SSD', badge: 'New', isBoosted: true, boostLevel: 'silver', seller: 'Nexcom Ventures', loc: 'CBD' }
+            { id: 1, cat: 'laptops', name: 'HP EliteBook 840 G8', price: 'KSh 85,000', img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=50', specs: 'Intel Core i7 11th Gen • 16GB RAM • 512GB SSD', badge: 'Verified', isBoosted: false, boostLevel: 'none', seller: 'Nexcom Ventures', loc: 'Nairobi CBD', phone: '254725258963' },
+            { id: 2, cat: 'phones', name: 'iPhone 15 Pro Max', price: 'KSh 185,000', img: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=400&q=50', specs: '256GB • Natural Titanium • Battery 100%', badge: 'Premium', isBoosted: true, boostLevel: 'gold', seller: 'Nexcom Ventures', loc: 'Mama Ngina St', phone: '254725258963' },
+            { id: 3, cat: 'motors', name: 'Toyota Harrier 2018', price: 'KSh 3,850,000', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=400&q=50', specs: 'Zero Mileage • Sunroof • Leather', badge: 'New', isBoosted: false, boostLevel: 'none', seller: 'Car Mart', loc: 'Karen', phone: '254722816001' },
+            { id: 4, cat: 'fashion', name: 'Luxury Chronograph', price: 'KSh 12,500', img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=50', specs: 'Automatic • Sapphire Glass', badge: 'Luxury', isBoosted: true, boostLevel: 'bronze', seller: 'Watch Hub', loc: 'CBD', phone: '254722816001' },
+            { id: 5, cat: 'land', name: '50x100 Kamulu', price: 'KSh 950,000', img: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=600&q=80', specs: 'Prime location • Ready Title Deed', badge: 'Urgent', isBoosted: false, boostLevel: 'none', seller: 'Land Co', loc: 'Kamulu', phone: '254722816001' },
+            { id: 6, cat: 'laptops', name: 'MacBook Pro M2 14"', price: 'KSh 245,000', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50', specs: 'M2 Chip • 16GB RAM • 512GB SSD', badge: 'New', isBoosted: true, boostLevel: 'silver', seller: 'Nexcom Ventures', loc: 'CBD', phone: '254725258963' }
         ];
 
         let cur = 'all';
@@ -398,10 +398,18 @@
             
             // Show Seller Info
             document.getElementById('m-specs').innerHTML += `
-                <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-                    <p class="text-[10px] uppercase font-black text-slate-400">Seller Information</p>
-                    <p class="text-xs font-bold text-slate-600 dark:text-slate-300 mt-1"><i class="fa-solid fa-shop mr-1"></i> ${a.seller || 'Verified Seller'}</p>
-                    <p class="text-[10px] text-slate-500 mt-1"><i class="fa-solid fa-location-dot mr-1"></i> ${a.loc || 'Nairobi'}</p>
+                <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-end">
+                    <div>
+                        <p class="text-[10px] uppercase font-black text-slate-400">Seller Information</p>
+                        <p class="text-xs font-bold text-slate-600 dark:text-slate-300 mt-1">
+                            <i class="fa-solid fa-shop mr-1"></i> ${a.seller || 'Verified Seller'}
+                            ${a.seller === 'Nexcom Ventures' ? '<i class="fa-solid fa-circle-check text-blue-500 ml-1"></i>' : ''}
+                        </p>
+                        <p class="text-[10px] text-slate-500 mt-1"><i class="fa-solid fa-location-dot mr-1"></i> ${a.loc || 'Nairobi'}</p>
+                    </div>
+                    <button onclick="shareAd()" class="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-400">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </button>
                 </div>
             `;
             
@@ -464,7 +472,8 @@
                 isBoosted: false,
                 boostLevel: 'none',
                 seller: 'Anonymous Seller',
-                loc: 'Kenya'
+                loc: 'Kenya',
+                phone: '254722816001'
             };
             
             lastCreatedAdId = newAd.id;
@@ -505,12 +514,27 @@
             alert(`🚀 ${selectedBoost.toUpperCase()} Boost Active! Your ad is now prioritized.`);
         }
         function call() { 
-            if(currentAd) window.location.href = 'tel:0722816001'; 
+            if(currentAd) {
+                const phone = currentAd.phone || '254722816001';
+                window.location.href = `tel:${phone}`; 
+            }
         }
         function wpp() { 
             if(currentAd) {
-                const msg = encodeURIComponent(`Hi Soko Mpya, I'm interested in the ${currentAd.name} priced at ${currentAd.price}. Is it still available?`);
-                window.open(`https://wa.me/254722816001?text=${msg}`, '_blank');
+                const phone = currentAd.phone || '254722816001';
+                const msg = encodeURIComponent(`Hi, I'm interested in your ${currentAd.name} (${currentAd.price}) listed on Soko Mpya. Is it available?`);
+                window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+            }
+        }
+        function shareAd() {
+            if(currentAd && navigator.share) {
+                navigator.share({
+                    title: currentAd.name,
+                    text: `Check out this ${currentAd.name} for ${currentAd.price} on Soko Mpya!`,
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                alert('Sharing not supported on this browser. Copy the URL to share!');
             }
         }
 

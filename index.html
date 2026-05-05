@@ -146,6 +146,65 @@
         </div>
     </div>
 
+    <!-- Upload Modal (Easy & Direct) -->
+    <div id="postModal" class="fixed inset-0 z-[110] hidden flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl relative max-h-[95vh] flex flex-col">
+            <div class="p-4 border-b flex items-center justify-between">
+                <h3 class="font-black text-lg">Post New Ad</h3>
+                <button onclick="closePost()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600"><i class="fa fa-times"></i></button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto space-y-5 no-scrollbar">
+                <div>
+                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Item Photos</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="aspect-square bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 transition" onclick="alert('Photo selection opened...')">
+                            <i class="fa fa-camera text-slate-300 mb-1"></i>
+                            <span class="text-[8px] font-bold text-slate-400 uppercase">Add Photo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">What are you selling?</label>
+                        <input type="text" id="postName" placeholder="e.g. MacBook Pro M1" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Category</label>
+                        <select id="postCat" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm outline-none appearance-none">
+                            <option value="laptops">Laptops</option>
+                            <option value="phones">Phones</option>
+                            <option value="motors">Motors</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="land">Land</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Price (KSh)</label>
+                        <input type="number" id="postPrice" placeholder="e.g. 45000" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm outline-none focus:border-blue-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Condition</label>
+                    <div class="flex gap-2" id="condGroup">
+                        <button onclick="setCond(this, 'New')" class="cond-btn active-cond flex-1 py-2 rounded-lg border-2 border-blue-600 text-[10px] font-black uppercase tracking-wider bg-blue-50 text-blue-600">New</button>
+                        <button onclick="setCond(this, 'Ex-UK')" class="cond-btn flex-1 py-2 rounded-lg border border-slate-200 text-[10px] font-black uppercase tracking-wider bg-slate-50 text-slate-500">Ex-UK</button>
+                        <button onclick="setCond(this, 'Used')" class="cond-btn flex-1 py-2 rounded-lg border border-slate-200 text-[10px] font-black uppercase tracking-wider bg-slate-50 text-slate-500">Used</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Description & Specs</label>
+                    <textarea id="postSpecs" rows="3" placeholder="Describe the RAM, Storage, Condition, etc." class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm outline-none focus:border-blue-500"></textarea>
+                </div>
+
+                <button onclick="publishAd()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase text-xs tracking-widest shadow-lg shadow-blue-500/20 active:scale-95 transition">Publish Now</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const CATEGORIES = [
             { id: 'all', name: 'All', icon: 'fa-grid' },
@@ -221,7 +280,45 @@
             document.body.style.overflow = 'auto';
         }
 
-        function postAd() { alert("Post your items for free on Soko Mpya."); }
+        /* Upload Logic */
+        let selectedCond = 'New';
+        function postAd() {
+            document.getElementById('postModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closePost() {
+            document.getElementById('postModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        function setCond(el, val) {
+            document.querySelectorAll('.cond-btn').forEach(b => {
+                b.classList.remove('border-blue-600', 'bg-blue-50', 'text-blue-600');
+                b.classList.add('border-slate-200', 'bg-slate-50', 'text-slate-500');
+            });
+            el.classList.add('border-blue-600', 'bg-blue-50', 'text-blue-600');
+            el.classList.remove('border-slate-200', 'bg-slate-50', 'text-slate-500');
+            selectedCond = val;
+        }
+        function publishAd() {
+            const name = document.getElementById('postName').value;
+            const price = document.getElementById('postPrice').value;
+            if(!name || !price) return alert("Please enter Name and Price");
+            
+            const newAd = {
+                id: Date.now(),
+                cat: document.getElementById('postCat').value,
+                name: name,
+                price: 'KSh ' + Number(price).toLocaleString(),
+                img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50', // Default placeholder
+                specs: document.getElementById('postSpecs').value,
+                badge: selectedCond
+            };
+            
+            ADS.unshift(newAd);
+            filter('all');
+            closePost();
+            alert("Success! Your item is now live on Soko Mpya.");
+        }
         function call() { alert("Dialing Merchant..."); }
         function wpp() { alert("Opening WhatsApp..."); }
 

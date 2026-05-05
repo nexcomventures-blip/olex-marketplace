@@ -357,11 +357,15 @@
 
         function search(q) {
             const res = ADS.filter(a => a.name.toLowerCase().includes(q.toLowerCase()));
+            document.getElementById('stats').innerText = `${res.length} matches found`;
             render(res);
         }
 
+        let currentAd = null;
+
         function openP(id) {
             const a = ADS.find(ad => ad.id === id);
+            currentAd = a;
             document.getElementById('m-img').src = a.img;
             document.getElementById('m-name').innerText = a.name;
             document.getElementById('m-price').innerText = a.price;
@@ -452,8 +456,15 @@
             filter('all');
             alert(`🚀 ${selectedBoost.toUpperCase()} Boost Active! Your ad is now prioritized.`);
         }
-        function call() { alert("Dialing Merchant..."); }
-        function wpp() { alert("Opening WhatsApp..."); }
+        function call() { 
+            if(currentAd) window.location.href = 'tel:0722816001'; 
+        }
+        function wpp() { 
+            if(currentAd) {
+                const msg = encodeURIComponent(`Hi Soko Mpya, I'm interested in the ${currentAd.name} priced at ${currentAd.price}. Is it still available?`);
+                window.open(`https://wa.me/254722816001?text=${msg}`, '_blank');
+            }
+        }
 
         init();
     </script>

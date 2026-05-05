@@ -189,8 +189,22 @@
                 </div>
                 <div class="flex justify-between items-start">
                     <div>
-                        <span id="m-badge" class="text-[10px] font-black uppercase text-blue-600 mb-1 block"></span>
+                        <div class="flex items-center gap-1.5 mb-1">
+                            <span id="m-badge" class="text-[10px] font-black uppercase text-blue-600 block"></span>
+                            <div class="flex items-center gap-1 bg-green-50 text-green-700 px-1.5 py-0.5 rounded text-[8px] font-black uppercase border border-green-100">
+                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                                Online
+                            </div>
+                        </div>
                         <h3 id="m-name" class="text-xl font-bold mb-1"></h3>
+                        <div class="flex items-center gap-1 text-amber-400 text-[10px] mb-2">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span class="text-slate-400 font-bold ml-1">(48 Reviews)</span>
+                        </div>
                     </div>
                     <div class="text-right">
                         <p id="m-price" class="text-2xl font-black text-blue-600"></p>
@@ -198,9 +212,13 @@
                     </div>
                 </div>
                     <div class="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl text-xs text-slate-500 mb-4 leading-relaxed" id="m-specs"></div>
-                    <div class="flex items-center gap-2 mb-6 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-xl border border-blue-100 dark:border-blue-800">
+                    <div onclick="showSafety()" class="flex items-center gap-2 mb-6 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-xl border border-blue-100 dark:border-blue-800 cursor-pointer hover:bg-blue-100 transition">
                         <i class="fa fa-shield-check text-blue-600"></i>
-                        <p class="text-[9px] font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">Protected by Soko Mpya Escrow</p>
+                        <div class="flex-1">
+                            <p class="text-[9px] font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">Protected by Soko Mpya Escrow</p>
+                            <p class="text-[7px] text-blue-500 font-bold uppercase tracking-tight">Tap to see how it works</p>
+                        </div>
+                        <i class="fa fa-chevron-right text-blue-300 text-xs"></i>
                     </div>
                 <div class="grid grid-cols-2 gap-3">
                     <button onclick="call()" class="bg-blue-600 text-white py-4 rounded-xl font-bold uppercase text-xs">Call</button>
@@ -468,6 +486,10 @@
             );
             document.getElementById('stats').innerText = `${res.length} items found`;
             render(res);
+        }
+
+        function showSafety() {
+            alert("🛡️ SOKO MPYA PROTECTION:\n\n1. Secure Payment: Your money is held in escrow.\n2. Inspection Period: You verify the item before the seller gets paid.\n3. Verified Sellers Only: We vet all pro merchants like Nexcom Ventures.\n\nShop with confidence!");
         }
 
         let currentAd = null;

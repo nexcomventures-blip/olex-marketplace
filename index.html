@@ -219,6 +219,13 @@
             </div>
             
             <div class="p-6 overflow-y-auto space-y-5 no-scrollbar">
+                <div id="syncDropzone" class="bg-blue-50 border-2 border-dashed border-blue-200 rounded-2xl p-6 text-center cursor-pointer hover:bg-blue-100 transition" onclick="document.getElementById('syncInput').click()">
+                    <i class="fa fa-cloud-arrow-up text-blue-500 text-2xl mb-2"></i>
+                    <p class="text-xs font-black text-blue-700 uppercase">Inventory Sync</p>
+                    <p class="text-[10px] text-blue-500 mt-1">Drop a CSV or JSON file here to upload all items at once</p>
+                    <input type="file" id="syncInput" class="hidden" accept=".csv,.json" onchange="handleSync(this)">
+                </div>
+
                 <div>
                     <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Item Photos</label>
                     <div class="grid grid-cols-3 gap-3">
@@ -346,6 +353,60 @@
 
         function toggleDark() {
             document.documentElement.classList.toggle('dark');
+        }
+
+        function handleSync(input) {
+            const file = input.files[0];
+            if(!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const content = e.target.result;
+                    let newItems = [];
+                    
+                    if(file.name.endsWith('.json')) {
+                        newItems = JSON.parse(content);
+                    } else if(file.name.endsWith('.csv')) {
+                        const lines = content.split('\n');
+                        const headers = lines[0].split(',');
+                        for(let i = 1; i < lines.length; i++) {
+                            const cols = lines[i].split(',');
+                            if(cols.length < 2) continue;
+                            const item = {};
+                            headers.forEach((h, idx) => item[h.trim()] = cols[idx]?.trim());
+                            newItems.push(item);
+                        }
+                    }
+
+                    newItems.forEach(item => {
+                        const ad = {
+                            id: Date.now() + Math.random(),
+                            cat: item.category || 'laptops',
+                            name: item.name || 'Untitled Item',
+                            price: item.price ? (item.price.startsWith('KSh') ? item.price : 'KSh ' + Number(item.price).toLocaleString()) : 'KSh 0',
+                            oldPrice: item.oldPrice,
+                            img: item.image || 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50',
+                            imgs: [item.image || 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50'],
+                            specs: item.specs || item.description || '',
+                            badge: item.condition || 'Verified',
+                            isBoosted: false,
+                            boostLevel: 'none',
+                            seller: 'Nexcom Ventures',
+                            loc: item.location || 'Nairobi CBD',
+                            phone: '254725258963'
+                        };
+                        ADS.unshift(ad);
+                    });
+                    
+                    filter('all');
+                    closePost();
+                    alert(`Sync Complete! ${newItems.length} items added to your inventory.`);
+                } catch(err) {
+                    alert("Error parsing file. Please check the format.");
+                }
+            };
+            reader.readAsText(file);
         }
 
         function init() {

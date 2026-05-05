@@ -266,10 +266,35 @@
                         <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Category</label>
                         <select id="postCat" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm outline-none appearance-none">
                             <option value="laptops">Laptops</option>
-                            <option value="phones">Phones</option>
-                            <option value="motors">Motors</option>
-                            <option value="fashion">Fashion</option>
-                            <option value="land">Land</option>
+                            <option value="phones">Phones & Tablets</option>
+                            <option value="electronics">TV & Audio</option>
+                            <option value="gaming">Video Games</option>
+                            <option value="cameras">Cameras</option>
+                            <option value="computing">Computer Parts</option>
+                            <option value="vehicles">Vehicles</option>
+                            <option value="bikes">Motorbikes</option>
+                            <option value="parts">Auto Parts</option>
+                            <option value="property-rent">Rentals</option>
+                            <option value="property-sale">Property for Sale</option>
+                            <option value="land">Land & Plots</option>
+                            <option value="furniture">Furniture</option>
+                            <option value="appliances">Home Appliances</option>
+                            <option value="decor">Home & Garden</option>
+                            <option value="fashion-men">Mens Fashion</option>
+                            <option value="fashion-women">Womens Fashion</option>
+                            <option value="watches">Watches</option>
+                            <option value="shoes">Shoes</option>
+                            <option value="beauty">Health & Beauty</option>
+                            <option value="kids">Kids & Toys</option>
+                            <option value="sports">Sports & Gym</option>
+                            <option value="hobbies">Hobbies & Art</option>
+                            <option value="agriculture">Agriculture</option>
+                            <option value="livestock">Livestock</option>
+                            <option value="pets">Pets</option>
+                            <option value="services">Services</option>
+                            <option value="jobs">Jobs</option>
+                            <option value="industrial">Industrial Equipment</option>
+                            <option value="other">Others</option>
                         </select>
                     </div>
                     <div>
@@ -384,19 +409,44 @@
 
     <script>
         const CATEGORIES = [
-            { id: 'all', name: 'All', icon: 'fa-grid' },
+            { id: 'all', name: 'All Items', icon: 'fa-grid-2' },
             { id: 'laptops', name: 'Laptops' },
-            { id: 'phones', name: 'Phones' },
-            { id: 'motors', name: 'Motors' },
-            { id: 'fashion', name: 'Fashion' },
-            { id: 'land', name: 'Land' }
+            { id: 'phones', name: 'Phones & Tablets' },
+            { id: 'electronics', name: 'TV & Audio' },
+            { id: 'gaming', name: 'Video Games' },
+            { id: 'cameras', name: 'Cameras' },
+            { id: 'computing', name: 'Computer Parts' },
+            { id: 'vehicles', name: 'Vehicles' },
+            { id: 'bikes', name: 'Motorbikes' },
+            { id: 'parts', name: 'Auto Parts' },
+            { id: 'property-rent', name: 'Rentals' },
+            { id: 'property-sale', name: 'Property for Sale' },
+            { id: 'land', name: 'Land & Plots' },
+            { id: 'furniture', name: 'Furniture' },
+            { id: 'appliances', name: 'Home Appliances' },
+            { id: 'decor', name: 'Home & Garden' },
+            { id: 'fashion-men', name: 'Mens Fashion' },
+            { id: 'fashion-women', name: 'Womens Fashion' },
+            { id: 'watches', name: 'Watches' },
+            { id: 'shoes', name: 'Shoes' },
+            { id: 'beauty', name: 'Health & Beauty' },
+            { id: 'kids', name: 'Kids & Toys' },
+            { id: 'sports', name: 'Sports & Gym' },
+            { id: 'hobbies', name: 'Hobbies & Art' },
+            { id: 'agriculture', name: 'Agriculture' },
+            { id: 'livestock', name: 'Livestock' },
+            { id: 'pets', name: 'Pets' },
+            { id: 'services', name: 'Services' },
+            { id: 'jobs', name: 'Jobs' },
+            { id: 'industrial', name: 'Industrial Equipment' },
+            { id: 'other', name: 'Others' }
         ];
 
         const ADS = [
             { id: 1, cat: 'laptops', name: 'HP EliteBook 840 G8', price: 'KSh 85,000', oldPrice: 'KSh 92,000', img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=50', imgs: ['https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=50', 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50'], specs: 'Intel Core i7 11th Gen • 16GB RAM • 512GB SSD', badge: 'Verified', isBoosted: false, boostLevel: 'none', seller: 'Nexcom Ventures', loc: 'Nairobi CBD', phone: '254725258963' },
             { id: 2, cat: 'phones', name: 'iPhone 15 Pro Max', price: 'KSh 185,000', oldPrice: 'KSh 195,000', img: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=400&q=50', imgs: ['https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=400&q=50', 'https://images.unsplash.com/photo-1678911820864-e2c567c655d7?auto=format&fit=crop&w=400&q=50'], specs: '256GB • Natural Titanium • Battery 100%', badge: 'Premium', isBoosted: true, boostLevel: 'gold', seller: 'Nexcom Ventures', loc: 'Mama Ngina St', phone: '254725258963' },
-            { id: 3, cat: 'motors', name: 'Toyota Harrier 2018', price: 'KSh 3,850,000', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=400&q=50', imgs: ['https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=400&q=50'], specs: 'Zero Mileage • Sunroof • Leather', badge: 'New', isBoosted: false, boostLevel: 'none', seller: 'Car Mart', loc: 'Karen', phone: '254722816001' },
-            { id: 4, cat: 'fashion', name: 'Luxury Chronograph', price: 'KSh 12,500', oldPrice: 'KSh 15,000', img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=50', imgs: ['https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=50'], specs: 'Automatic • Sapphire Glass', badge: 'Luxury', isBoosted: true, boostLevel: 'bronze', seller: 'Watch Hub', loc: 'CBD', phone: '254722816001' },
+            { id: 3, cat: 'vehicles', name: 'Toyota Harrier 2018', price: 'KSh 3,850,000', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=400&q=50', imgs: ['https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=400&q=50'], specs: 'Zero Mileage • Sunroof • Leather', badge: 'New', isBoosted: false, boostLevel: 'none', seller: 'Car Mart', loc: 'Karen', phone: '254722816001' },
+            { id: 4, cat: 'watches', name: 'Luxury Chronograph', price: 'KSh 12,500', oldPrice: 'KSh 15,000', img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=50', imgs: ['https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=400&q=50'], specs: 'Automatic • Sapphire Glass', badge: 'Luxury', isBoosted: true, boostLevel: 'bronze', seller: 'Watch Hub', loc: 'CBD', phone: '254722816001' },
             { id: 5, cat: 'land', name: '50x100 Kamulu', price: 'KSh 950,000', img: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=600&q=80', imgs: ['https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=600&q=80'], specs: 'Prime location • Ready Title Deed', badge: 'Urgent', isBoosted: false, boostLevel: 'none', seller: 'Land Co', loc: 'Kamulu', phone: '254722816001' },
             { id: 6, cat: 'laptops', name: 'MacBook Pro M2 14"', price: 'KSh 245,000', oldPrice: 'KSh 260,000', img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50', imgs: ['https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=50'], specs: 'M2 Chip • 16GB RAM • 512GB SSD', badge: 'New', isBoosted: true, boostLevel: 'silver', seller: 'Nexcom Ventures', loc: 'CBD', phone: '254725258963' }
         ];

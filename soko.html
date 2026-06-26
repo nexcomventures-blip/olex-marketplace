@@ -289,11 +289,34 @@
                 <div class="relative h-80 flex-shrink-0 group bg-slate-100">
                     <img :src="selectedAd?.images[currentImgIndex]" class="w-full h-full object-contain transition-all duration-300">
                     
-                    <!-- Close Button - Moved down and made more visible -->
+                    <!-- Close Button -->
                     <button @click="selectedAd = null" class="absolute top-4 right-4 w-10 h-10 bg-black/40 backdrop-blur-md rounded-full text-white flex items-center justify-center z-20 active:scale-90">
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
-                
+
+                    <!-- Image Navigation -->
+                    <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 px-4 flex justify-between pointer-events-none" x-show="selectedAd?.images.length > 1">
+                        <button @click.stop="currentImgIndex = (currentImgIndex > 0) ? currentImgIndex - 1 : selectedAd.images.length - 1" 
+                                class="w-10 h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center pointer-events-auto active:scale-90">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button @click.stop="currentImgIndex = (currentImgIndex < selectedAd.images.length - 1) ? currentImgIndex + 1 : 0" 
+                                class="w-10 h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center pointer-events-auto active:scale-90">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Thumbnail Reel -->
+                <div class="flex gap-2 px-6 py-3 overflow-x-auto category-scroll bg-white border-b border-slate-50" x-show="selectedAd?.images.length > 1">
+                    <template x-for="(img, idx) in selectedAd?.images">
+                        <button @click="currentImgIndex = idx" 
+                                class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border-2 transition-all"
+                                :class="idx === currentImgIndex ? 'border-blue-500 scale-105' : 'border-transparent opacity-60'">
+                            <img :src="img" class="w-full h-full object-cover">
+                        </button>
+                    </template>
+                </div>
                 <div class="p-6">
                     <div class="flex justify-between items-start">
                         <div>

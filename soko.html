@@ -34,6 +34,17 @@
             from { transform: translateY(100%); }
             to { transform: translateY(0); }
         }
+
+        /* Pulse for Verification */
+        .pulse-verify {
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
     </style>
 </head>
 <body x-data="{ 
@@ -42,6 +53,7 @@
     selectedCategory: 'All',
     selectedAd: null,
     loading: true,
+    currentImgIndex: 0,
     categories: [
         { name: 'All', icon: 'fa-border-all', color: 'bg-slate-500' },
         { name: 'Laptops', icon: 'fa-laptop', color: 'bg-blue-500' },
@@ -72,6 +84,10 @@
         if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
         if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
         return `${Math.floor(diffInSeconds / 86400)}d ago`;
+    },
+    openAd(ad) {
+        this.selectedAd = ad;
+        this.currentImgIndex = 0;
     }
 }" x-init="init()" x-cloak>
 
@@ -211,7 +227,7 @@
             <!-- Grid Layout -->
             <div x-show="!loading" class="grid grid-cols-2 gap-4">
                 <template x-for="ad in filteredAds" :key="ad.id">
-                    <div @click="selectedAd = ad" class="product-card bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all">
+                    <div @click="openAd(ad)" class="product-card bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all">
                         <div class="relative aspect-square">
                             <img :src="ad.images[0]" class="w-full h-full object-cover">
                             <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider text-slate-800 flex items-center gap-1">
@@ -268,27 +284,81 @@
             <div class="h-1.5 w-12 bg-slate-200 rounded-full mx-auto mt-4 mb-2 flex-shrink-0"></div>
             
             <div class="overflow-y-auto flex-1 pb-32">
-                <div class="relative h-72 flex-shrink-0">
-                    <img :src="selectedAd?.images[0]" class="w-full h-full object-cover">
-                    <button @click="selectedAd = null" class="absolute top-6 right-6 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full text-white flex items-center justify-center">
+                <!-- Swipeable Gallery -->
+                <div class="relative h-80 flex-shrink-0 group">
+                    <img :src="selectedAd?.images[currentImgIndex]" class="w-full h-full object-cover transition-all duration-300">
+                    
+                    <!-- Image Navigation -->
+                    <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 px-4 flex justify-between pointer-events-none">
+                        <button @click.stop="currentImgIndex = (currentImgIndex > 0) ? currentImgIndex - 1 : selectedAd.images.length - 1" 
+                                class="w-10 h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center pointer-events-auto active:scale-90">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button @click.stop="currentImgIndex = (currentImgIndex < selectedAd.images.length - 1) ? currentImgIndex + 1 : 0" 
+                                class="w-10 h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center pointer-events-auto active:scale-90">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Image Dots -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5">
+                        <template x-for="(img, idx) in selectedAd?.images">
+                            <div class="h-1 rounded-full transition-all duration-300" 
+                                 :class="idx === currentImgIndex ? 'w-6 bg-white' : 'w-1.5 bg-white/50'"></div>
+                        </template>
+                    </div>
+
+                    <button @click="selectedAd = null" class="absolute top-6 right-6 w-10 h-10 bg-black/20 backdrop-blur-md rounded-full text-white flex items-center justify-center">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
                 
                 <div class="p-6">
-                    <div class="flex justify-between items-center">
-                        <p class="text-3xl font-black text-blue-600" x-text="`KSh ${selectedAd?.price.toLocaleString()}`"></p>
-                        <span class="bg-blue-50 text-blue-600 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Featured</span>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-3xl font-black text-blue-600" x-text="`KSh ${selectedAd?.price.toLocaleString()}`"></p>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="bg-blue-50 text-blue-600 text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-widest">TOP AD</span>
+                                <span class="flex items-center gap-1 text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase pulse-verify">
+                                    <i class="fa-solid fa-circle-check"></i> Verified Merchant
+                                </span>
+                            </div>
+                        </div>
+                        <button class="w-10 h-10 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
                     </div>
+                    
                     <h3 class="text-xl font-bold mt-4 text-slate-900 leading-tight" x-text="selectedAd?.title"></h3>
                     
-                    <div class="mt-6 grid grid-cols-2 gap-4">
-                        <template x-for="(val, key) in selectedAd?.specs">
-                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest" x-text="key"></p>
-                                <p class="text-sm font-bold text-slate-800 mt-1" x-text="val"></p>
+                    <div class="mt-8">
+                        <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Specifications</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <template x-for="(val, key) in selectedAd?.specs">
+                                <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-blue-500 shadow-sm">
+                                        <i class="fa-solid fa-microchip text-[10px]"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] font-bold text-slate-400 uppercase leading-none" x-text="key"></p>
+                                        <p class="text-xs font-black text-slate-800 mt-1" x-text="val"></p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Merchant Location</h4>
+                        <div class="flex items-center gap-3 p-4 bg-slate-900 rounded-3xl text-white">
+                            <div class="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center text-blue-400">
+                                <i class="fa-solid fa-map-location-dot"></i>
                             </div>
-                        </template>
+                            <div>
+                                <p class="text-xs font-black" x-text="selectedAd?.location"></p>
+                                <p class="text-[10px] font-bold text-slate-400">Usually responds in 5 mins</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

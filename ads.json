@@ -1,0 +1,20 @@
+[
+    {
+        "id": "ad_001",
+        "title": "Laptop Lenovo ThinkPad T470s 8GB Intel Core i5 SSD 256GB",
+        "price": 19500,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-06-25T16:35:00",
+        "status": "reviewing",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "Lenovo",
+            "Model": "ThinkPad T470s",
+            "Subtype": "Ultrabook",
+            "Condition": "Refurbished",
+            "RAM": "8GB"
+        },
+        "images": ["media/1782405403178.jpg"]
+    }
+]

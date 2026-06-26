@@ -271,47 +271,28 @@
 
     <!-- Item Detail Modal -->
     <div x-show="selectedAd" 
-         class="fixed inset-0 z-[100] flex items-end justify-center p-0 sm:p-4" 
+         class="fixed inset-0 z-[100] flex items-end justify-center p-0" 
          x-transition:enter="transition ease-out duration-300" 
-         x-transition:enter-start="opacity-0" 
-         x-transition:enter-end="opacity-100" 
+         x-transition:enter-start="opacity-0 translate-y-full" 
+         x-transition:enter-end="opacity-100 translate-y-0" 
          x-transition:leave="transition ease-in duration-200" 
-         x-transition:leave-start="opacity-100" 
-         x-transition:leave-end="opacity-0">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="selectedAd = null"></div>
+         x-transition:leave-start="opacity-100 translate-y-0" 
+         x-transition:leave-end="opacity-0 translate-y-full">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="selectedAd = null"></div>
         <div x-show="selectedAd" 
-             class="bg-white w-full max-w-lg rounded-t-[40px] sm:rounded-[40px] relative z-10 modal-enter overflow-hidden flex flex-col h-[85vh] sm:h-auto sm:max-h-[90vh]">
-            <div class="h-1.5 w-12 bg-slate-200 rounded-full mx-auto mt-4 mb-2 flex-shrink-0"></div>
+             class="bg-white w-full max-w-lg rounded-t-[32px] relative z-10 flex flex-col h-[92vh] shadow-2xl">
+            <!-- Pull Handle for visual hint -->
+            <div @click="selectedAd = null" class="h-1.5 w-12 bg-slate-300/50 rounded-full mx-auto mt-3 mb-1 flex-shrink-0 cursor-pointer"></div>
             
-            <div class="overflow-y-auto flex-1 pb-32">
+            <div class="overflow-y-auto flex-1 touch-pan-y overscroll-contain">
                 <!-- Swipeable Gallery -->
-                <div class="relative h-80 flex-shrink-0 group">
-                    <img :src="selectedAd?.images[currentImgIndex]" class="w-full h-full object-cover transition-all duration-300">
+                <div class="relative h-80 flex-shrink-0 group bg-slate-100">
+                    <img :src="selectedAd?.images[currentImgIndex]" class="w-full h-full object-contain transition-all duration-300">
                     
-                    <!-- Image Navigation -->
-                    <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 px-4 flex justify-between pointer-events-none">
-                        <button @click.stop="currentImgIndex = (currentImgIndex > 0) ? currentImgIndex - 1 : selectedAd.images.length - 1" 
-                                class="w-10 h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center pointer-events-auto active:scale-90">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <button @click.stop="currentImgIndex = (currentImgIndex < selectedAd.images.length - 1) ? currentImgIndex + 1 : 0" 
-                                class="w-10 h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center pointer-events-auto active:scale-90">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </button>
-                    </div>
-
-                    <!-- Image Dots -->
-                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5">
-                        <template x-for="(img, idx) in selectedAd?.images">
-                            <div class="h-1 rounded-full transition-all duration-300" 
-                                 :class="idx === currentImgIndex ? 'w-6 bg-white' : 'w-1.5 bg-white/50'"></div>
-                        </template>
-                    </div>
-
-                    <button @click="selectedAd = null" class="absolute top-6 right-6 w-10 h-10 bg-black/20 backdrop-blur-md rounded-full text-white flex items-center justify-center">
-                        <i class="fa-solid fa-xmark"></i>
+                    <!-- Close Button - Moved down and made more visible -->
+                    <button @click="selectedAd = null" class="absolute top-4 right-4 w-10 h-10 bg-black/40 backdrop-blur-md rounded-full text-white flex items-center justify-center z-20 active:scale-90">
+                        <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
-                </div>
                 
                 <div class="p-6">
                     <div class="flex justify-between items-start">
@@ -364,8 +345,8 @@
             </div>
 
             <!-- Sticky Action Bar in Modal -->
-            <div class="absolute bottom-0 left-0 right-0 p-6 glass border-t border-slate-100">
-                <a :href="`https://wa.me/254722816001?text=Hi Nexcom, I'm interested in the ${selectedAd?.title} listed on Soko Mpya for KSh ${selectedAd?.price.toLocaleString()}.`" 
+            <div class="mt-auto p-6 glass border-t border-slate-100 flex-shrink-0">
+                <a :href="`https://wa.me/254722816001?text=Hi Nexcom, I'm interested in the ${selectedAd?.title} listed on Soko Mpya for KSh ${selectedAd?.price.toLocaleString()}`" 
                    class="w-full bg-green-500 text-white py-5 rounded-2xl font-black flex items-center justify-center gap-3 shadow-xl shadow-green-500/20 active:scale-95 transition-all">
                     <i class="fa-brands fa-whatsapp text-xl"></i> START CHAT TO BUY
                 </a>

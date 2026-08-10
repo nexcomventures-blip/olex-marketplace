@@ -15,6 +15,308 @@
             "Condition": "Refurbished",
             "RAM": "8GB"
         },
-        "images": ["media/1782405403178.jpg"]
+        "images": [
+            "media/1782405403178.jpg"
+        ]
+    },
+    {
+        "id": "gaming_01",
+        "title": "HP Omen 15-dh",
+        "price": 99500,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "HP",
+            "Model": "HP Omen 15-dh",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7-9750H | 16GB RAM | 512GB SSD | RTX 2070 8GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_02",
+        "title": "HP Omen 15-ek",
+        "price": 109000,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "HP",
+            "Model": "HP Omen 15-ek",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7-10750H | 16GB RAM | 512GB SSD | RTX 3060 6GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_03",
+        "title": "HP Omen 15-ek",
+        "price": 112000,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "HP",
+            "Model": "HP Omen 15-ek",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7-10750H | 16GB RAM | 512GB SSD | RTX 2070 8GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_04",
+        "title": "HP Omen 16-wf",
+        "price": 162500,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "HP",
+            "Model": "HP Omen 16-wf",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7-14650HX | 16GB RAM | 512GB SSD | RTX 4060 8GB | 16” 2K"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_05",
+        "title": "HP Omen Transcend 14",
+        "price": 208000,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "HP",
+            "Model": "HP Omen Transcend 14",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core Ultra 7 155H | 16GB RAM | 1TB SSD | RTX 4060 8GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_06",
+        "title": "HP Omen Transcend 14",
+        "price": 234000,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "HP",
+            "Model": "HP Omen Transcend 14",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core Ultra 9 285H | 32GB RAM | 1TB SSD | RTX 4070 8GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_07",
+        "title": "ASUS ROG Strix G531GW",
+        "price": 98000,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "ASUS",
+            "Model": "ASUS ROG Strix G531GW",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7-9750H | 16GB RAM | 512GB SSD | RTX 2070 8GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_08",
+        "title": "ASUS Zephyrus S GX502",
+        "price": 102000,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "ASUS",
+            "Model": "ASUS Zephyrus S GX502",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7-9750H | 16GB RAM | 512GB SSD | RTX 2070 8GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_09",
+        "title": "ASUS TUF Gaming A15 FA506",
+        "price": 104500,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "ASUS",
+            "Model": "ASUS TUF Gaming A15 FA506",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "AMD Ryzen 7 5800H | 16GB RAM | 512GB SSD | RTX 3050 4GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_10",
+        "title": "ASUS ROG Strix G512LV",
+        "price": 106500,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "ASUS",
+            "Model": "ASUS ROG Strix G512LV",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7-10875H | 16GB RAM | 512GB SSD | RTX 2060 6GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_11",
+        "title": "Dell G5 5500",
+        "price": 97000,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "Dell",
+            "Model": "Dell G5 5500",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7-10750H | 16GB RAM | 512GB SSD | RTX 2060 6GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_12",
+        "title": "Dell Precision 3580 Touch",
+        "price": 99000,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "Dell",
+            "Model": "Dell Precision 3580 Touch",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7 13th Gen | 16GB RAM | 512GB SSD | RTX A500 4GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_13",
+        "title": "Dell G15 5511",
+        "price": 114000,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "Dell",
+            "Model": "Dell G15 5511",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7-11800H | 16GB RAM | 512GB SSD | RTX 3060 6GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_14",
+        "title": "Dell G15 5530",
+        "price": 161000,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "Dell",
+            "Model": "Dell G15 5530",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7-13650H | 16GB RAM | 1TB SSD | RTX 4060 8GB"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
+    },
+    {
+        "id": "gaming_15",
+        "title": "Dell G16 7630",
+        "price": 166500,
+        "location": "Nairobi, Nairobi Central",
+        "time": "2026-08-10T11:34:00",
+        "status": "available",
+        "is_top": true,
+        "specs": {
+            "Type": "Laptop",
+            "Brand": "Dell",
+            "Model": "Dell G16 7630",
+            "Subtype": "Gaming laptop",
+            "Condition": "Certified refurbished",
+            "Details": "Intel Core i7-13900HX | 16GB RAM | 1TB SSD | RTX 4060 8GB | 16” QHD+ 2K"
+        },
+        "images": [
+            "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\" viewBox=\"0 0 600 600\"%3E%3Crect width=\"600\" height=\"600\" fill=\"%230f172a\"/%3E%3Ctext x=\"300\" y=\"270\" fill=\"%2360a5fa\" font-family=\"Arial\" font-size=\"42\" text-anchor=\"middle\"%3EGAMING%3C/text%3E%3Ctext x=\"300\" y=\"330\" fill=\"white\" font-family=\"Arial\" font-size=\"34\" text-anchor=\"middle\"%3ELAPTOPS%3C/text%3E%3C/svg%3E"
+        ]
     }
 ]
